@@ -22,8 +22,8 @@ const Footer: React.FC = () => {
                 </h3>
               </div>
               <p className="text-gray-300 leading-relaxed">
-                Transformamos eventos em experiências inesquecíveis com drinks premium 
-                e buffet sofisticado.
+                Transformamos eventos em experiências inesquecíveis com drinks, coquetéis 
+                e mesas gourmet.
               </p>
               <div className="flex space-x-4">
                 <a 
