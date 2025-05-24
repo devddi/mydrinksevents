@@ -30,11 +30,9 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <img 
-              src="https://vlriviouictrannhemnh.supabase.co/storage/v1/object/public/midiasOMD/fotosBebidas/logo-omd.svg" 
-              alt="MyDrinks Logo" 
-              className="w-10 h-10"
-            />
+            <div className="w-10 h-10 bg-brand-orange rounded-full flex items-center justify-center">
+              <span className="text-white font-bold text-lg">M</span>
+            </div>
             <h1 className="font-playfair text-2xl font-bold text-white">
               MyDrinks<span className="text-brand-orange">!</span>
             </h1>
