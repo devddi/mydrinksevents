@@ -1,46 +1,64 @@
 
 import React from 'react';
-import { Wine, Utensils, Users, Building, Heart, Calendar } from 'lucide-react';
+import { Wine, Utensils, Users, Building, Heart, Calendar, Loader2 } from 'lucide-react';
+import { useSiteServices } from '@/hooks/useSiteData';
 
 const ServicesSection: React.FC = () => {
-  const services = [
+  const { data: services, isLoading, error } = useSiteServices();
+
+  // Icon mapping
+  const iconMap: Record<string, any> = {
+    Wine,
+    Utensils,
+    Users,
+    Building,
+    Heart,
+    Calendar,
+    UtensilsCrossed: Utensils,
+  };
+
+  if (isLoading) {
+    return (
+      <section id="servicos" className="py-20 relative">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-center">
+            <Loader2 className="animate-spin text-brand-orange" size={48} />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    console.error('Error loading services:', error);
+  }
+
+  // Fallback services if data fails to load
+  const fallbackServices = [
     {
-      icon: Wine,
-      title: 'Drinks Premium',
-      description: 'Coquetéis autorais, drinks clássicos e criações exclusivas com ingredientes premium',
-      features: ['Bartenders profissionais', 'Equipamentos completos', 'Drinks personalizados', 'Degustação prévia']
+      id: 1,
+      titulo: 'Drinks Premium',
+      descricao: 'Coquetéis autorais, drinks clássicos e criações exclusivas com ingredientes premium',
+      icone: 'Wine',
+      ordem: 1
     },
     {
-      icon: Utensils,
-      title: 'Buffet Sofisticado',
-      description: 'Cardápios elaborados com apresentação impecável para todos os tipos de evento',
-      features: ['Cardápio personalizado', 'Ingredientes frescos', 'Apresentação gourmet', 'Opções vegetarianas']
+      id: 2,
+      titulo: 'Buffet Sofisticado',
+      descricao: 'Cardápios elaborados com apresentação impecável para todos os tipos de evento',
+      icone: 'Utensils',
+      ordem: 2
     },
     {
-      icon: Building,
-      title: 'Eventos Corporativos',
-      description: 'Atendimento especializado para empresas, networking e confraternizações',
-      features: ['Coffee break premium', 'Happy hour executivo', 'Almoços corporativos', 'Coquetéis de networking']
-    },
-    {
-      icon: Heart,
-      title: 'Casamentos',
-      description: 'Transformamos o seu dia especial em uma experiência gastronômica inesquecível',
-      features: ['Degustação para noivos', 'Cardápio personalizado', 'Decoração temática', 'Serviço completo']
-    },
-    {
-      icon: Users,
-      title: 'Festas & Aniversários',
-      description: 'Celebrações únicas com o toque especial da MyDrinks!',
-      features: ['Temas personalizados', 'Drinks temáticos', 'Buffet variado', 'Animação gastronômica']
-    },
-    {
-      icon: Calendar,
-      title: 'Eventos Especiais',
-      description: 'Formaturas, confraternizações e celebrações que merecem destaque',
-      features: ['Planejamento completo', 'Equipe especializada', 'Logística profissional', 'Pós-evento incluso']
+      id: 3,
+      titulo: 'Eventos Corporativos',
+      descricao: 'Atendimento especializado para empresas, networking e confraternizações',
+      icone: 'Building',
+      ordem: 3
     }
   ];
+
+  const displayServices = services && services.length > 0 ? services : fallbackServices;
 
   return (
     <section id="servicos" className="py-20 relative">
@@ -59,39 +77,34 @@ const ServicesSection: React.FC = () => {
 
           {/* Services grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <div
-                key={index}
-                className="glass-card p-6 group hover:bg-white/10 transition-all duration-300 hover:scale-105"
-              >
-                <div className="w-16 h-16 bg-brand-orange/20 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <service.icon className="text-brand-orange" size={28} />
+            {displayServices.map((service) => {
+              const IconComponent = iconMap[service.icone] || Wine;
+              
+              return (
+                <div
+                  key={service.id}
+                  className="glass-card p-6 group hover:bg-white/10 transition-all duration-300 hover:scale-105"
+                >
+                  <div className="w-16 h-16 bg-brand-orange/20 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <IconComponent className="text-brand-orange" size={28} />
+                  </div>
+                  
+                  <h3 className="font-playfair text-xl font-semibold text-white mb-3">
+                    {service.titulo}
+                  </h3>
+                  
+                  <p className="text-gray-300 mb-4 leading-relaxed">
+                    {service.descricao}
+                  </p>
+                  
+                  <div className="mt-6 pt-4 border-t border-white/10">
+                    <button className="text-brand-orange hover:text-brand-orange-light font-semibold text-sm transition-colors duration-300">
+                      Saber mais →
+                    </button>
+                  </div>
                 </div>
-                
-                <h3 className="font-playfair text-xl font-semibold text-white mb-3">
-                  {service.title}
-                </h3>
-                
-                <p className="text-gray-300 mb-4 leading-relaxed">
-                  {service.description}
-                </p>
-                
-                <ul className="space-y-2">
-                  {service.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center text-sm text-gray-400">
-                      <div className="w-1.5 h-1.5 bg-brand-orange rounded-full mr-2 flex-shrink-0" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                
-                <div className="mt-6 pt-4 border-t border-white/10">
-                  <button className="text-brand-orange hover:text-brand-orange-light font-semibold text-sm transition-colors duration-300">
-                    Saber mais →
-                  </button>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* CTA */}

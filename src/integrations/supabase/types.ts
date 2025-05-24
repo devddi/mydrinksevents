@@ -287,6 +287,186 @@ export type Database = {
         }
         Relationships: []
       }
+      site_configuracoes: {
+        Row: {
+          chave: string
+          created_at: string | null
+          descricao: string | null
+          id: number
+          tipo: string | null
+          updated_at: string | null
+          valor: string | null
+        }
+        Insert: {
+          chave: string
+          created_at?: string | null
+          descricao?: string | null
+          id?: number
+          tipo?: string | null
+          updated_at?: string | null
+          valor?: string | null
+        }
+        Update: {
+          chave?: string
+          created_at?: string | null
+          descricao?: string | null
+          id?: number
+          tipo?: string | null
+          updated_at?: string | null
+          valor?: string | null
+        }
+        Relationships: []
+      }
+      site_contatos: {
+        Row: {
+          created_at: string | null
+          data_evento: string | null
+          email: string
+          id: number
+          mensagem: string | null
+          nome: string
+          numero_convidados: number | null
+          respondido: boolean | null
+          status: string | null
+          telefone: string | null
+          tipo_evento: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          data_evento?: string | null
+          email: string
+          id?: number
+          mensagem?: string | null
+          nome: string
+          numero_convidados?: number | null
+          respondido?: boolean | null
+          status?: string | null
+          telefone?: string | null
+          tipo_evento?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          data_evento?: string | null
+          email?: string
+          id?: number
+          mensagem?: string | null
+          nome?: string
+          numero_convidados?: number | null
+          respondido?: boolean | null
+          status?: string | null
+          telefone?: string | null
+          tipo_evento?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      site_depoimentos: {
+        Row: {
+          ativo: boolean | null
+          avaliacao: number | null
+          created_at: string | null
+          data_evento: string | null
+          depoimento: string
+          empresa: string | null
+          foto_cliente: string | null
+          id: number
+          nome_cliente: string
+        }
+        Insert: {
+          ativo?: boolean | null
+          avaliacao?: number | null
+          created_at?: string | null
+          data_evento?: string | null
+          depoimento: string
+          empresa?: string | null
+          foto_cliente?: string | null
+          id?: number
+          nome_cliente: string
+        }
+        Update: {
+          ativo?: boolean | null
+          avaliacao?: number | null
+          created_at?: string | null
+          data_evento?: string | null
+          depoimento?: string
+          empresa?: string | null
+          foto_cliente?: string | null
+          id?: number
+          nome_cliente?: string
+        }
+        Relationships: []
+      }
+      site_galeria: {
+        Row: {
+          ativo: boolean | null
+          categoria: string | null
+          created_at: string | null
+          descricao: string | null
+          id: number
+          ordem: number | null
+          titulo: string | null
+          url_imagem: string
+        }
+        Insert: {
+          ativo?: boolean | null
+          categoria?: string | null
+          created_at?: string | null
+          descricao?: string | null
+          id?: number
+          ordem?: number | null
+          titulo?: string | null
+          url_imagem: string
+        }
+        Update: {
+          ativo?: boolean | null
+          categoria?: string | null
+          created_at?: string | null
+          descricao?: string | null
+          id?: number
+          ordem?: number | null
+          titulo?: string | null
+          url_imagem?: string
+        }
+        Relationships: []
+      }
+      site_servicos: {
+        Row: {
+          ativo: boolean | null
+          created_at: string | null
+          descricao: string | null
+          icone: string | null
+          id: number
+          ordem: number | null
+          preco: number | null
+          titulo: string
+          updated_at: string | null
+        }
+        Insert: {
+          ativo?: boolean | null
+          created_at?: string | null
+          descricao?: string | null
+          icone?: string | null
+          id?: number
+          ordem?: number | null
+          preco?: number | null
+          titulo: string
+          updated_at?: string | null
+        }
+        Update: {
+          ativo?: boolean | null
+          created_at?: string | null
+          descricao?: string | null
+          icone?: string | null
+          id?: number
+          ordem?: number | null
+          preco?: number | null
+          titulo?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       vw_bebidas_clientes: {

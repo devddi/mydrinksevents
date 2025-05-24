@@ -1,53 +1,72 @@
 
 import React, { useState, useEffect } from 'react';
-import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Star, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
+import { useSiteTestimonials } from '@/hooks/useSiteData';
 
 const TestimonialsSection: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { data: testimonials, isLoading, error } = useSiteTestimonials();
 
-  const testimonials = [
+  // Fallback testimonials if data fails to load
+  const fallbackTestimonials = [
     {
-      name: 'Marina Silva',
-      role: 'Noiva',
-      rating: 5,
-      text: 'A MyDrinks! fez do nosso casamento um sonho realizado. Os drinks eram únicos e o buffet superou todas as expectativas. Nossos convidados não param de elogiar!',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b120?q=80&w=400&auto=format&fit=crop'
+      id: 1,
+      nome_cliente: 'Marina Silva',
+      empresa: 'Noiva',
+      avaliacao: 5,
+      depoimento: 'A MyDrinks! fez do nosso casamento um sonho realizado. Os drinks eram únicos e o buffet superou todas as expectativas. Nossos convidados não param de elogiar!',
+      foto_cliente: 'https://images.unsplash.com/photo-1494790108755-2616b612b120?q=80&w=400&auto=format&fit=crop'
     },
     {
-      name: 'Roberto Santos',
-      role: 'Diretor de RH - TechCorp',
-      rating: 5,
-      text: 'Contratamos para nossa confraternização anual e o resultado foi excepcional. Profissionalismo, qualidade e criatividade em cada detalhe. Recomendo fortemente!',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop'
+      id: 2,
+      nome_cliente: 'Roberto Santos',
+      empresa: 'Diretor de RH - TechCorp',
+      avaliacao: 5,
+      depoimento: 'Contratamos para nossa confraternização anual e o resultado foi excepcional. Profissionalismo, qualidade e criatividade em cada detalhe. Recomendo fortemente!',
+      foto_cliente: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop'
     },
     {
-      name: 'Ana Carolina',
-      role: 'Organizadora de Eventos',
-      rating: 5,
-      text: 'Trabalho com eventos há 10 anos e posso afirmar: a MyDrinks! é referência em qualidade. Sempre entregam além do prometido, com pontualidade e excelência.',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop'
-    },
-    {
-      name: 'Carlos Eduardo',
-      role: 'Aniversariante',
-      rating: 5,
-      text: 'Meus 50 anos ficaram inesquecíveis! Os drinks temáticos e o buffet gourmet impressionaram todos os convidados. Serviço impecável do início ao fim.',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400&auto=format&fit=crop'
+      id: 3,
+      nome_cliente: 'Ana Carolina',
+      empresa: 'Organizadora de Eventos',
+      avaliacao: 5,
+      depoimento: 'Trabalho com eventos há 10 anos e posso afirmar: a MyDrinks! é referência em qualidade. Sempre entregam além do prometido, com pontualidade e excelência.',
+      foto_cliente: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop'
     }
   ];
 
+  const displayTestimonials = testimonials && testimonials.length > 0 ? testimonials : fallbackTestimonials;
+
   const nextTestimonial = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    setCurrentIndex((prev) => (prev + 1) % displayTestimonials.length);
   };
 
   const prevTestimonial = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setCurrentIndex((prev) => (prev - 1 + displayTestimonials.length) % displayTestimonials.length);
   };
 
   useEffect(() => {
     const interval = setInterval(nextTestimonial, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [displayTestimonials.length]);
+
+  if (isLoading) {
+    return (
+      <section className="py-20 relative">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-center">
+            <Loader2 className="animate-spin text-brand-orange" size={48} />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    console.error('Error loading testimonials:', error);
+  }
+
+  const currentTestimonial = displayTestimonials[currentIndex];
 
   return (
     <section className="py-20 relative">
@@ -75,7 +94,7 @@ const TestimonialsSection: React.FC = () => {
                 </button>
                 
                 <div className="flex space-x-2">
-                  {testimonials.map((_, index) => (
+                  {displayTestimonials.map((_, index) => (
                     <button
                       key={index}
                       onClick={() => setCurrentIndex(index)}
@@ -97,29 +116,29 @@ const TestimonialsSection: React.FC = () => {
               <div className="text-center">
                 {/* Stars */}
                 <div className="flex justify-center mb-6">
-                  {Array.from({ length: testimonials[currentIndex].rating }).map((_, index) => (
+                  {Array.from({ length: currentTestimonial.avaliacao }).map((_, index) => (
                     <Star key={index} className="text-brand-orange fill-current" size={24} />
                   ))}
                 </div>
 
                 {/* Testimonial text */}
                 <blockquote className="text-lg md:text-xl text-gray-200 mb-8 leading-relaxed italic">
-                  "{testimonials[currentIndex].text}"
+                  "{currentTestimonial.depoimento}"
                 </blockquote>
 
                 {/* Author info */}
                 <div className="flex items-center justify-center space-x-4">
                   <img
-                    src={testimonials[currentIndex].image}
-                    alt={testimonials[currentIndex].name}
+                    src={currentTestimonial.foto_cliente || 'https://images.unsplash.com/photo-1494790108755-2616b612b120?q=80&w=400&auto=format&fit=crop'}
+                    alt={currentTestimonial.nome_cliente}
                     className="w-16 h-16 rounded-full object-cover border-2 border-brand-orange/30"
                   />
                   <div className="text-left">
                     <div className="font-semibold text-white text-lg">
-                      {testimonials[currentIndex].name}
+                      {currentTestimonial.nome_cliente}
                     </div>
                     <div className="text-gray-400">
-                      {testimonials[currentIndex].role}
+                      {currentTestimonial.empresa}
                     </div>
                   </div>
                 </div>
