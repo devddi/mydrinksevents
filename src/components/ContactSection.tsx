@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin, Instagram, Send, CheckCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const ContactSection: React.FC = () => {
   const { toast } = useToast();
@@ -16,11 +17,18 @@ const ContactSection: React.FC = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
+    }));
+  };
+
+  const handleSelectChange = (value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      eventType: value
     }));
   };
 
@@ -210,20 +218,18 @@ Aguardo contato!`;
                     <label className="block text-white text-sm font-medium mb-2">
                       Tipo de Evento *
                     </label>
-                    <select
-                      name="eventType"
-                      required
-                      value={formData.eventType}
-                      onChange={handleInputChange}
-                      className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white focus:border-brand-orange focus:outline-none transition-colors duration-300"
-                    >
-                      <option value="">Selecione o tipo</option>
-                      <option value="casamento">Casamento</option>
-                      <option value="corporativo">Evento Corporativo</option>
-                      <option value="aniversario">Aniversário</option>
-                      <option value="festa">Festa</option>
-                      <option value="outro">Outro</option>
-                    </select>
+                    <Select value={formData.eventType} onValueChange={handleSelectChange} required>
+                      <SelectTrigger className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white focus:border-brand-orange focus:outline-none transition-colors duration-300 [&>span]:text-white data-[placeholder]:text-gray-400">
+                        <SelectValue placeholder="Selecione o tipo" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-gray-800 border-gray-600 z-50">
+                        <SelectItem value="casamento" className="text-white hover:bg-gray-700 focus:bg-gray-700">Casamento</SelectItem>
+                        <SelectItem value="corporativo" className="text-white hover:bg-gray-700 focus:bg-gray-700">Evento Corporativo</SelectItem>
+                        <SelectItem value="aniversario" className="text-white hover:bg-gray-700 focus:bg-gray-700">Aniversário</SelectItem>
+                        <SelectItem value="festa" className="text-white hover:bg-gray-700 focus:bg-gray-700">Festa</SelectItem>
+                        <SelectItem value="outro" className="text-white hover:bg-gray-700 focus:bg-gray-700">Outro</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                   
                   <div>
