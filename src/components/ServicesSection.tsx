@@ -90,12 +90,6 @@ const ServicesSection: React.FC = () => {
                   <p className="text-gray-300 mb-4 leading-relaxed">
                     {service.descricao}
                   </p>
-                  
-                  <div className="mt-6 pt-4 border-t border-white/10">
-                    <button className="text-brand-orange hover:text-brand-orange-light font-semibold text-sm transition-colors duration-300">
-                      Saber mais →
-                    </button>
-                  </div>
                 </div>
               );
             })}
