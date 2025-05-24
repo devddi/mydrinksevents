@@ -92,7 +92,7 @@ const Footer: React.FC = () => {
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">
                   <Phone className="text-brand-orange flex-shrink-0" size={18} />
-                  <span className="text-gray-300">(11) 99999-9999</span>
+                  <span className="text-gray-300">(88) 98894-0894</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Mail className="text-brand-orange flex-shrink-0" size={18} />
@@ -100,11 +100,11 @@ const Footer: React.FC = () => {
                 </div>
                 <div className="flex items-center space-x-3">
                   <MapPin className="text-brand-orange flex-shrink-0" size={18} />
-                  <span className="text-gray-300">São Paulo e Região</span>
+                  <span className="text-gray-300">Sobral e Região</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Instagram className="text-brand-orange flex-shrink-0" size={18} />
-                  <span className="text-gray-300">@mydrinks</span>
+                  <span className="text-gray-300">@mydrinksevents</span>
                 </div>
               </div>
             </div>
