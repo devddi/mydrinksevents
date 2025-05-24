@@ -22,7 +22,7 @@ const AboutSection: React.FC = () => {
     {
       icon: Shield,
       title: 'Confiança',
-      description: 'Mais de 5 anos transformando eventos em experiências inesquecíveis'
+      description: 'Mais de 1 ano transformando eventos em experiências inesquecíveis'
     }
   ];
 
