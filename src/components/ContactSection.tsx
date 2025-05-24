@@ -3,9 +3,11 @@ import React, { useState } from 'react';
 import { Send } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useSubmitContact } from '@/hooks/useSiteData';
 
 const ContactSection: React.FC = () => {
   const { toast } = useToast();
+  const { submitContact } = useSubmitContact();
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -35,13 +37,28 @@ const ContactSection: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      // Preparar os dados para envio
+      const contactData = {
+        nome: formData.name,
+        email: 'contato@mydrinks.com.br', // Email padrão já que removemos o campo
+        telefone: formData.phone || null,
+        tipo_evento: formData.eventType || null,
+        data_evento: formData.eventDate ? new Date(formData.eventDate).toISOString().split('T')[0] : null,
+        numero_convidados: formData.guests ? parseInt(formData.guests) : null,
+        mensagem: formData.message || null
+      };
+
+      console.log('Enviando dados do contato:', contactData);
+
+      await submitContact(contactData);
+
       toast({
         title: "Orçamento solicitado com sucesso!",
         description: "Entraremos em contato em até 24 horas.",
       });
+
+      // Limpar o formulário
       setFormData({
         name: '',
         phone: '',
@@ -50,7 +67,16 @@ const ContactSection: React.FC = () => {
         guests: '',
         message: ''
       });
-    }, 2000);
+    } catch (error) {
+      console.error('Erro ao enviar contato:', error);
+      toast({
+        title: "Erro ao enviar solicitação",
+        description: "Tente novamente em alguns instantes.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
