@@ -31,34 +31,28 @@ const ServicesSection: React.FC = () => {
 
   if (error) {
     console.error('Error loading services:', error);
+    return (
+      <section id="servicos" className="py-20 relative">
+        <div className="container mx-auto px-4">
+          <div className="text-center text-white">
+            <p>Erro ao carregar serviços. Tente novamente mais tarde.</p>
+          </div>
+        </div>
+      </section>
+    );
   }
 
-  // Fallback services if data fails to load
-  const fallbackServices = [
-    {
-      id: 1,
-      titulo: 'Drinks Premium',
-      descricao: 'Coquetéis autorais, drinks clássicos e criações exclusivas com ingredientes premium',
-      icone: 'Wine',
-      ordem: 1
-    },
-    {
-      id: 2,
-      titulo: 'Buffet Sofisticado',
-      descricao: 'Cardápios elaborados com apresentação impecável para todos os tipos de evento',
-      icone: 'Utensils',
-      ordem: 2
-    },
-    {
-      id: 3,
-      titulo: 'Eventos Corporativos',
-      descricao: 'Atendimento especializado para empresas, networking e confraternizações',
-      icone: 'Building',
-      ordem: 3
-    }
-  ];
-
-  const displayServices = services && services.length > 0 ? services : fallbackServices;
+  if (!services || services.length === 0) {
+    return (
+      <section id="servicos" className="py-20 relative">
+        <div className="container mx-auto px-4">
+          <div className="text-center text-white">
+            <p>Nenhum serviço encontrado.</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="servicos" className="py-20 relative">
@@ -77,7 +71,7 @@ const ServicesSection: React.FC = () => {
 
           {/* Services grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {displayServices.map((service) => {
+            {services.map((service) => {
               const IconComponent = iconMap[service.icone] || Wine;
               
               return (

@@ -7,48 +7,24 @@ const TestimonialsSection: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { data: testimonials, isLoading, error } = useSiteTestimonials();
 
-  // Fallback testimonials if data fails to load
-  const fallbackTestimonials = [
-    {
-      id: 1,
-      nome_cliente: 'Marina Silva',
-      empresa: 'Noiva',
-      avaliacao: 5,
-      depoimento: 'A MyDrinks! fez do nosso casamento um sonho realizado. Os drinks eram únicos e o buffet superou todas as expectativas. Nossos convidados não param de elogiar!',
-      foto_cliente: 'https://images.unsplash.com/photo-1494790108755-2616b612b120?q=80&w=400&auto=format&fit=crop'
-    },
-    {
-      id: 2,
-      nome_cliente: 'Roberto Santos',
-      empresa: 'Diretor de RH - TechCorp',
-      avaliacao: 5,
-      depoimento: 'Contratamos para nossa confraternização anual e o resultado foi excepcional. Profissionalismo, qualidade e criatividade em cada detalhe. Recomendo fortemente!',
-      foto_cliente: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop'
-    },
-    {
-      id: 3,
-      nome_cliente: 'Ana Carolina',
-      empresa: 'Organizadora de Eventos',
-      avaliacao: 5,
-      depoimento: 'Trabalho com eventos há 10 anos e posso afirmar: a MyDrinks! é referência em qualidade. Sempre entregam além do prometido, com pontualidade e excelência.',
-      foto_cliente: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop'
-    }
-  ];
-
-  const displayTestimonials = testimonials && testimonials.length > 0 ? testimonials : fallbackTestimonials;
-
   const nextTestimonial = () => {
-    setCurrentIndex((prev) => (prev + 1) % displayTestimonials.length);
+    if (testimonials && testimonials.length > 0) {
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    }
   };
 
   const prevTestimonial = () => {
-    setCurrentIndex((prev) => (prev - 1 + displayTestimonials.length) % displayTestimonials.length);
+    if (testimonials && testimonials.length > 0) {
+      setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    }
   };
 
   useEffect(() => {
-    const interval = setInterval(nextTestimonial, 5000);
-    return () => clearInterval(interval);
-  }, [displayTestimonials.length]);
+    if (testimonials && testimonials.length > 0) {
+      const interval = setInterval(nextTestimonial, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [testimonials]);
 
   if (isLoading) {
     return (
@@ -64,9 +40,30 @@ const TestimonialsSection: React.FC = () => {
 
   if (error) {
     console.error('Error loading testimonials:', error);
+    return (
+      <section className="py-20 relative">
+        <div className="container mx-auto px-4">
+          <div className="text-center text-white">
+            <p>Erro ao carregar depoimentos. Tente novamente mais tarde.</p>
+          </div>
+        </div>
+      </section>
+    );
   }
 
-  const currentTestimonial = displayTestimonials[currentIndex];
+  if (!testimonials || testimonials.length === 0) {
+    return (
+      <section className="py-20 relative">
+        <div className="container mx-auto px-4">
+          <div className="text-center text-white">
+            <p>Nenhum depoimento encontrado.</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  const currentTestimonial = testimonials[currentIndex];
 
   return (
     <section className="py-20 relative">
@@ -94,7 +91,7 @@ const TestimonialsSection: React.FC = () => {
                 </button>
                 
                 <div className="flex space-x-2">
-                  {displayTestimonials.map((_, index) => (
+                  {testimonials.map((_, index) => (
                     <button
                       key={index}
                       onClick={() => setCurrentIndex(index)}
@@ -116,7 +113,7 @@ const TestimonialsSection: React.FC = () => {
               <div className="text-center">
                 {/* Stars */}
                 <div className="flex justify-center mb-6">
-                  {Array.from({ length: currentTestimonial.avaliacao }).map((_, index) => (
+                  {Array.from({ length: currentTestimonial.avaliacao || 5 }).map((_, index) => (
                     <Star key={index} className="text-brand-orange fill-current" size={24} />
                   ))}
                 </div>
@@ -137,9 +134,11 @@ const TestimonialsSection: React.FC = () => {
                     <div className="font-semibold text-white text-lg">
                       {currentTestimonial.nome_cliente}
                     </div>
-                    <div className="text-gray-400">
-                      {currentTestimonial.empresa}
-                    </div>
+                    {currentTestimonial.empresa && (
+                      <div className="text-gray-400">
+                        {currentTestimonial.empresa}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
