@@ -59,34 +59,51 @@ const GallerySection: React.FC = () => {
           </div>
 
           {/* Gallery grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {galleryImages.map((image) => (
               <div
                 key={image.id}
-                className="group relative overflow-hidden rounded-xl cursor-pointer"
+                className="glass-card p-0 group hover:bg-white/10 transition-all duration-300 hover:scale-105 cursor-pointer overflow-hidden"
                 onClick={() => setSelectedImage(image.url_imagem)}
               >
-                <div className="aspect-square">
+                {/* Image container */}
+                <div className="aspect-square relative overflow-hidden rounded-t-xl">
                   <img
                     src={image.url_imagem}
                     alt={image.titulo || image.descricao || 'Imagem da galeria'}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                   />
+                  
+                  {/* Overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
                 
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute bottom-4 left-4 right-4">
-                    {image.categoria && (
-                      <span className="inline-block bg-brand-orange text-white text-xs px-2 py-1 rounded-full mb-2">
+                {/* Card content */}
+                <div className="p-6">
+                  {image.categoria && (
+                    <div className="mb-3">
+                      <span className="inline-block bg-brand-orange/20 text-brand-orange text-xs px-3 py-1 rounded-full font-semibold">
                         {image.categoria}
                       </span>
-                    )}
-                    {(image.titulo || image.descricao) && (
-                      <p className="text-white text-sm font-medium leading-tight">
-                        {image.titulo || image.descricao}
-                      </p>
-                    )}
+                    </div>
+                  )}
+                  
+                  {image.titulo && (
+                    <h3 className="font-playfair text-lg font-semibold text-white mb-2">
+                      {image.titulo}
+                    </h3>
+                  )}
+                  
+                  {image.descricao && (
+                    <p className="text-gray-300 text-sm leading-relaxed mb-4">
+                      {image.descricao}
+                    </p>
+                  )}
+                  
+                  <div className="pt-4 border-t border-white/10">
+                    <span className="text-brand-orange hover:text-brand-orange-light font-semibold text-sm transition-colors duration-300">
+                      Ver imagem →
+                    </span>
                   </div>
                 </div>
               </div>
