@@ -33,7 +33,7 @@ export const SplashCursor: React.FC = () => {
         x,
         y,
         size: Math.random() * 20 + 15,
-        opacity: 1.0,
+        opacity: 0.5, // 50% less opacity (was 1.0)
         life: 1.0
       });
 
@@ -50,10 +50,10 @@ export const SplashCursor: React.FC = () => {
       for (let i = splashesRef.current.length - 1; i >= 0; i--) {
         const splash = splashesRef.current[i];
         
-        // Update splash
-        splash.life -= 0.015;
-        splash.size += 0.8;
-        splash.opacity = splash.life;
+        // Update splash - 30% slower (was 0.015, now ~0.0105)
+        splash.life -= 0.0105;
+        splash.size += 0.56; // 30% slower (was 0.8)
+        splash.opacity = splash.life * 0.5; // 50% less opacity
 
         if (splash.life <= 0) {
           splashesRef.current.splice(i, 1);
@@ -65,8 +65,8 @@ export const SplashCursor: React.FC = () => {
           splash.x, splash.y, 0,
           splash.x, splash.y, splash.size
         );
-        gradient.addColorStop(0, `rgba(255, 84, 0, ${splash.opacity * 0.8})`);
-        gradient.addColorStop(0.4, `rgba(255, 84, 0, ${splash.opacity * 0.4})`);
+        gradient.addColorStop(0, `rgba(255, 84, 0, ${splash.opacity * 0.4})`); // 50% less opacity (was 0.8)
+        gradient.addColorStop(0.4, `rgba(255, 84, 0, ${splash.opacity * 0.2})`); // 50% less opacity (was 0.4)
         gradient.addColorStop(1, `rgba(255, 84, 0, 0)`);
 
         ctx.fillStyle = gradient;
