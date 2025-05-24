@@ -34,7 +34,8 @@
   }
 
   body {
-    @apply bg-gray-900 text-foreground font-inter;
+    @apply text-foreground font-inter;
+    background-color: #181818;
   }
 
   html {

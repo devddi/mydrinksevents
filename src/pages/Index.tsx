@@ -12,7 +12,7 @@ import Footer from '@/components/Footer';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gray-900 relative overflow-x-hidden">
+    <div className="min-h-screen relative overflow-x-hidden" style={{ backgroundColor: '#181818' }}>
       {/* Animated smoke background */}
       <SmokeAnimation />
       
