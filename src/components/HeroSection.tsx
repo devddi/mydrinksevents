@@ -45,14 +45,14 @@ const HeroSection: React.FC = () => {
             <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight px-2">
               Transforme seu evento com os{' '}
               <span className="text-brand-orange">melhores drinks</span>{' '}
-              e buffet premium
+              e mesas gourmet
             </h1>
           </div>
 
           {/* Subtitle */}
           <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed px-4">
-              Criamos experiências únicas com drinks personalizados e buffet sofisticado 
+              Criamos experiências únicas com drinks personalizados, coquetéis e mesas gourmet 
               para casamentos, eventos corporativos e celebrações especiais
             </p>
           </div>
