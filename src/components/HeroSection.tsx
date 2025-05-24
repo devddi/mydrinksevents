@@ -22,11 +22,20 @@ const HeroSection: React.FC = () => {
       {/* Background overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-900/50 via-gray-900/70 to-gray-900/90 z-10" />
       
-      {/* Hero background image */}
+      {/* Hero background images */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
         style={{
           backgroundImage: `url('https://images.unsplash.com/photo-1566417109195-b8cb00c3e5d5?q=80&w=2000&auto=format&fit=crop')`,
+        }}
+      />
+      
+      {/* Smoke/herbs image overlay */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat z-5 opacity-30"
+        style={{
+          backgroundImage: `url('https://drinkerita.com.br/wp-content/uploads/2021/08/DEFUMACAO-COM-ERVAS-HERBACEAS.jpg')`,
+          mixBlendMode: 'multiply'
         }}
       />
 
