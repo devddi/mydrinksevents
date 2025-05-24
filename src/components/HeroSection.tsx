@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ChevronDown, Sparkles, Award, Users } from 'lucide-react';
 
@@ -20,7 +19,7 @@ const HeroSection: React.FC = () => {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden" style={{ backgroundColor: '#181818' }}>
       {/* Background overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-900/60 via-gray-900/70 to-gray-900/90 z-10" />
+      <div className="absolute inset-0 z-10" style={{ backgroundColor: 'rgba(24, 24, 24, 0.7)' }} />
       
       {/* Hero background images */}
       <div 
