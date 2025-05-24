@@ -35,11 +35,12 @@
 
   body {
     @apply text-foreground font-inter;
-    background-color: #181818;
+    background-color: #181818 !important;
   }
 
   html {
     scroll-behavior: smooth;
+    background-color: #181818 !important;
   }
 }
 
