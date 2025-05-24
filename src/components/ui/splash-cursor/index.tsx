@@ -1,3 +1,4 @@
+
 "use client";
 import { useEffect, useRef } from "react";
 import { getWebGLContext, createFBO, createDoubleFBO, getResolution, scaleByPixelRatio } from './webgl-utils';
@@ -62,6 +63,11 @@ function SplashCursor({
     let pointers: PointerData[] = [new (pointerPrototype as any)()];
 
     const { gl, ext } = getWebGLContext(canvas);
+    if (!gl || !ext) {
+      console.error('WebGL not supported');
+      return;
+    }
+    
     if (!ext.supportLinearFiltering) {
       config.DYE_RESOLUTION = 256;
       config.SHADING = false;

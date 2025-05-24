@@ -1,8 +1,12 @@
 import type { SplashCursorConfig, WebGLExtensions, FBO, DoubleFBO } from './types';
 
-export function getWebGLContext(canvas: HTMLCanvasElement): WebGLRenderingContext | WebGL2RenderingContext | null {
+export function getWebGLContext(canvas: HTMLCanvasElement): { gl: WebGLRenderingContext | WebGL2RenderingContext, ext: WebGLExtensions } | { gl: null, ext: null } {
   const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
-  return gl;
+  if (!gl) {
+    return { gl: null, ext: null };
+  }
+  const ext = getWebGLExtensions(gl);
+  return { gl, ext };
 }
 
 export function getWebGLExtensions(gl: WebGLRenderingContext | WebGL2RenderingContext): WebGLExtensions {
@@ -44,6 +48,24 @@ export function getWebGLExtensions(gl: WebGLRenderingContext | WebGL2RenderingCo
     halfFloatTexType,
     supportLinearFiltering,
   };
+}
+
+export function getResolution(resolution: number, gl: WebGLRenderingContext | WebGL2RenderingContext): { width: number; height: number } {
+  let aspectRatio = gl.drawingBufferWidth / gl.drawingBufferHeight;
+  if (aspectRatio < 1) aspectRatio = 1.0 / aspectRatio;
+
+  let max = Math.round(resolution * aspectRatio);
+  let min = Math.round(resolution);
+
+  if (gl.drawingBufferWidth > gl.drawingBufferHeight) {
+    return { width: max, height: min };
+  }
+  return { width: min, height: max };
+}
+
+export function scaleByPixelRatio(input: number): number {
+  let pixelRatio = window.devicePixelRatio || 1;
+  return Math.floor(input * pixelRatio);
 }
 
 export function createFBO(
