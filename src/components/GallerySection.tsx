@@ -1,52 +1,48 @@
 
 import React, { useState } from 'react';
-import { X } from 'lucide-react';
+import { X, Loader2 } from 'lucide-react';
+import { useSiteGallery } from '@/hooks/useSiteData';
 
 const GallerySection: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const { data: galleryImages, isLoading, error } = useSiteGallery();
 
-  const galleryImages = [
-    {
-      src: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=800&auto=format&fit=crop',
-      alt: 'Drinks elegantes em evento corporativo',
-      category: 'Drinks'
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1566417109195-b8cb00c3e5d5?q=80&w=800&auto=format&fit=crop',
-      alt: 'Buffet sofisticado para casamento',
-      category: 'Buffet'
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?q=80&w=800&auto=format&fit=crop',
-      alt: 'Mesa de drinks variados',
-      category: 'Drinks'
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=800&auto=format&fit=crop',
-      alt: 'Evento corporativo com buffet premium',
-      category: 'Corporativo'
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1561651188-d207bbec9dcb?q=80&w=800&auto=format&fit=crop',
-      alt: 'Casamento com decoração elegante',
-      category: 'Casamento'
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1551218372-a8789b81b253?q=80&w=800&auto=format&fit=crop',
-      alt: 'Coquetéis artesanais',
-      category: 'Drinks'
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=800&auto=format&fit=crop',
-      alt: 'Festa de aniversário premium',
-      category: 'Festa'
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1481833761820-0509d3217039?q=80&w=800&auto=format&fit=crop',
-      alt: 'Buffet gourmet variado',
-      category: 'Buffet'
-    }
-  ];
+  if (isLoading) {
+    return (
+      <section id="galeria" className="py-20 relative">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-center">
+            <Loader2 className="animate-spin text-brand-orange" size={48} />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    console.error('Error loading gallery:', error);
+    return (
+      <section id="galeria" className="py-20 relative">
+        <div className="container mx-auto px-4">
+          <div className="text-center text-white">
+            <p>Erro ao carregar galeria. Tente novamente mais tarde.</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (!galleryImages || galleryImages.length === 0) {
+    return (
+      <section id="galeria" className="py-20 relative">
+        <div className="container mx-auto px-4">
+          <div className="text-center text-white">
+            <p>Nenhuma imagem encontrada na galeria.</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="galeria" className="py-20 relative">
@@ -64,16 +60,16 @@ const GallerySection: React.FC = () => {
 
           {/* Gallery grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {galleryImages.map((image, index) => (
+            {galleryImages.map((image) => (
               <div
-                key={index}
+                key={image.id}
                 className="group relative overflow-hidden rounded-xl cursor-pointer"
-                onClick={() => setSelectedImage(image.src)}
+                onClick={() => setSelectedImage(image.url_imagem)}
               >
                 <div className="aspect-square">
                   <img
-                    src={image.src}
-                    alt={image.alt}
+                    src={image.url_imagem}
+                    alt={image.titulo || image.descricao || 'Imagem da galeria'}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                   />
                 </div>
@@ -81,12 +77,16 @@ const GallerySection: React.FC = () => {
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="absolute bottom-4 left-4 right-4">
-                    <span className="inline-block bg-brand-orange text-white text-xs px-2 py-1 rounded-full mb-2">
-                      {image.category}
-                    </span>
-                    <p className="text-white text-sm font-medium leading-tight">
-                      {image.alt}
-                    </p>
+                    {image.categoria && (
+                      <span className="inline-block bg-brand-orange text-white text-xs px-2 py-1 rounded-full mb-2">
+                        {image.categoria}
+                      </span>
+                    )}
+                    {(image.titulo || image.descricao) && (
+                      <p className="text-white text-sm font-medium leading-tight">
+                        {image.titulo || image.descricao}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
