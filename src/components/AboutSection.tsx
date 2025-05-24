@@ -50,8 +50,8 @@ const AboutSection: React.FC = () => {
                 </h3>
                 <p className="text-gray-300 leading-relaxed mb-4">
                   A MyDrinks! nasceu da paixão por criar momentos especiais através da gastronomia. 
-                  Fundada em 2019, começamos com o sonho de elevar o padrão de drinks e buffet 
-                  para eventos em São Paulo.
+                  Fundada em 2024, começamos com o sonho de elevar o padrão de drinks e mesas gurmet 
+                  para eventos em Sobral e região.
                 </p>
                 <p className="text-gray-300 leading-relaxed">
                   Hoje, somos referência em qualidade e inovação, atendendo desde casamentos íntimos 
