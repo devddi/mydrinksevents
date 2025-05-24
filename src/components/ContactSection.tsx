@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Instagram, Send, CheckCircle } from 'lucide-react';
+import { Send } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
@@ -51,20 +51,6 @@ const ContactSection: React.FC = () => {
         message: ''
       });
     }, 2000);
-  };
-
-  const openWhatsApp = () => {
-    const message = `Olá! Gostaria de solicitar um orçamento para meu evento.
-    
-Nome: ${formData.name || 'Não informado'}
-Tipo de evento: ${formData.eventType || 'Não informado'}
-Data do evento: ${formData.eventDate || 'Não informada'}
-Número de convidados: ${formData.guests || 'Não informado'}
-    
-Aguardo contato!`;
-    
-    const whatsappUrl = `https://wa.me/5588988940894?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
   };
 
   return (
@@ -180,34 +166,23 @@ Aguardo contato!`;
                 />
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="brand-button flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      <span>Enviando...</span>
-                    </>
-                  ) : (
-                    <>
-                      <Send size={20} />
-                      <span>Solicitar Orçamento</span>
-                    </>
-                  )}
-                </button>
-                
-                <button
-                  type="button"
-                  onClick={openWhatsApp}
-                  className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 flex items-center justify-center space-x-2"
-                >
-                  <Phone size={20} />
-                  <span>WhatsApp</span>
-                </button>
-              </div>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="brand-button flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed w-full"
+              >
+                {isSubmitting ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    <span>Enviando...</span>
+                  </>
+                ) : (
+                  <>
+                    <Send size={20} />
+                    <span>Solicitar Orçamento</span>
+                  </>
+                )}
+              </button>
             </form>
           </div>
         </div>
