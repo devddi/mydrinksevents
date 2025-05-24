@@ -81,11 +81,11 @@ const Header: React.FC = () => {
             <div className="hidden xl:flex items-center space-x-4 text-sm text-gray-300">
               <div className="flex items-center space-x-1">
                 <Phone size={16} className="text-brand-orange" />
-                <span>(11) 99999-9999</span>
+                <span>(88) 98894-0894</span>
               </div>
               <div className="flex items-center space-x-1">
                 <Instagram size={16} className="text-brand-orange" />
-                <span>@mydrinks</span>
+                <span>@mydrinksevents</span>
               </div>
             </div>
 
@@ -154,11 +154,11 @@ const Header: React.FC = () => {
               <div className="flex flex-col space-y-2 pt-4 border-t border-white/10 text-sm text-gray-300">
                 <div className="flex items-center space-x-2">
                   <Phone size={16} className="text-brand-orange" />
-                  <span>(11) 99999-9999</span>
+                  <span>(88) 98894-0894</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Instagram size={16} className="text-brand-orange" />
-                  <span>@mydrinks</span>
+                  <span>@mydrinksevents</span>
                 </div>
               </div>
             </nav>
