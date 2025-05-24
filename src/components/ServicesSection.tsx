@@ -1,10 +1,12 @@
-
 import React from 'react';
 import { Wine, Utensils, Users, Building, Heart, Calendar, Loader2 } from 'lucide-react';
 import { useSiteServices } from '@/hooks/useSiteData';
-
 const ServicesSection: React.FC = () => {
-  const { data: services, isLoading, error } = useSiteServices();
+  const {
+    data: services,
+    isLoading,
+    error
+  } = useSiteServices();
 
   // Icon mapping
   const iconMap: Record<string, any> = {
@@ -14,48 +16,37 @@ const ServicesSection: React.FC = () => {
     Building,
     Heart,
     Calendar,
-    UtensilsCrossed: Utensils,
+    UtensilsCrossed: Utensils
   };
-
   if (isLoading) {
-    return (
-      <section id="servicos" className="py-20 relative">
+    return <section id="servicos" className="py-20 relative">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-center">
             <Loader2 className="animate-spin text-brand-orange" size={48} />
           </div>
         </div>
-      </section>
-    );
+      </section>;
   }
-
   if (error) {
     console.error('Error loading services:', error);
-    return (
-      <section id="servicos" className="py-20 relative">
+    return <section id="servicos" className="py-20 relative">
         <div className="container mx-auto px-4">
           <div className="text-center text-white">
             <p>Erro ao carregar serviços. Tente novamente mais tarde.</p>
           </div>
         </div>
-      </section>
-    );
+      </section>;
   }
-
   if (!services || services.length === 0) {
-    return (
-      <section id="servicos" className="py-20 relative">
+    return <section id="servicos" className="py-20 relative">
         <div className="container mx-auto px-4">
           <div className="text-center text-white">
             <p>Nenhum serviço encontrado.</p>
           </div>
         </div>
-      </section>
-    );
+      </section>;
   }
-
-  return (
-    <section id="servicos" className="py-20 relative">
+  return <section id="servicos" className="py-20 relative">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
@@ -71,14 +62,9 @@ const ServicesSection: React.FC = () => {
 
           {/* Services grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service) => {
-              const IconComponent = iconMap[service.icone] || Wine;
-              
-              return (
-                <div
-                  key={service.id}
-                  className="glass-card p-6 group hover:bg-white/10 transition-all duration-300 hover:scale-105"
-                >
+            {services.map(service => {
+            const IconComponent = iconMap[service.icone] || Wine;
+            return <div key={service.id} className="glass-card p-6 group hover:bg-white/10 transition-all duration-300 hover:scale-105">
                   <div className="w-16 h-16 bg-brand-orange/20 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                     <IconComponent className="text-brand-orange" size={28} />
                   </div>
@@ -90,29 +76,16 @@ const ServicesSection: React.FC = () => {
                   <p className="text-gray-300 mb-4 leading-relaxed">
                     {service.descricao}
                   </p>
-                </div>
-              );
-            })}
+                </div>;
+          })}
           </div>
 
           {/* CTA */}
           <div className="text-center mt-16">
-            <div className="glass-card p-8 max-w-2xl mx-auto">
-              <h3 className="font-playfair text-2xl font-semibold text-white mb-4">
-                Não encontrou o que procura?
-              </h3>
-              <p className="text-gray-300 mb-6">
-                Criamos soluções personalizadas para atender suas necessidades específicas
-              </p>
-              <button className="brand-button">
-                Falar com Especialista
-              </button>
-            </div>
+            
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default ServicesSection;
