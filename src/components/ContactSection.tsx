@@ -57,7 +57,7 @@ Número de convidados: ${formData.guests || 'Não informado'}
     
 Aguardo contato!`;
     
-    const whatsappUrl = `https://wa.me/5511999999999?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/5588988940894?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 
@@ -90,7 +90,7 @@ Aguardo contato!`;
                     </div>
                     <div>
                       <div className="text-white font-semibold">Telefone</div>
-                      <div className="text-gray-300">(11) 99999-9999</div>
+                      <div className="text-gray-300">(88) 98894-0894</div>
                     </div>
                   </div>
                   
@@ -110,7 +110,7 @@ Aguardo contato!`;
                     </div>
                     <div>
                       <div className="text-white font-semibold">Instagram</div>
-                      <div className="text-gray-300">@mydrinks</div>
+                      <div className="text-gray-300">@mydrinksevents</div>
                     </div>
                   </div>
                   
@@ -120,7 +120,7 @@ Aguardo contato!`;
                     </div>
                     <div>
                       <div className="text-white font-semibold">Atendimento</div>
-                      <div className="text-gray-300">São Paulo e Região</div>
+                      <div className="text-gray-300">Sobral e Região</div>
                     </div>
                   </div>
                 </div>
@@ -187,7 +187,7 @@ Aguardo contato!`;
                       value={formData.phone}
                       onChange={handleInputChange}
                       className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-brand-orange focus:outline-none transition-colors duration-300"
-                      placeholder="(11) 99999-9999"
+                      placeholder="(88) 98888-8888"
                     />
                   </div>
                   
