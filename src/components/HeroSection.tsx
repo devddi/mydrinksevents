@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { ChevronDown, Sparkles, Award, Users } from 'lucide-react';
+import { Sparkles, Award, Users } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
   const scrollToServices = () => {
@@ -92,11 +93,6 @@ const HeroSection: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
-        <ChevronDown className="text-white" size={24} />
       </div>
     </section>
   );
