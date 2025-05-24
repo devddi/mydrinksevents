@@ -9,7 +9,7 @@ const GallerySection: React.FC = () => {
 
   if (isLoading) {
     return (
-      <section id="galeria" className="py-20 relative">
+      <section id="galeria" className="py-12 md:py-20 relative">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-center">
             <Loader2 className="animate-spin text-brand-orange" size={48} />
@@ -22,7 +22,7 @@ const GallerySection: React.FC = () => {
   if (error) {
     console.error('Error loading gallery:', error);
     return (
-      <section id="galeria" className="py-20 relative">
+      <section id="galeria" className="py-12 md:py-20 relative">
         <div className="container mx-auto px-4">
           <div className="text-center text-white">
             <p>Erro ao carregar galeria. Tente novamente mais tarde.</p>
@@ -34,7 +34,7 @@ const GallerySection: React.FC = () => {
 
   if (!galleryImages || galleryImages.length === 0) {
     return (
-      <section id="galeria" className="py-20 relative">
+      <section id="galeria" className="py-12 md:py-20 relative">
         <div className="container mx-auto px-4">
           <div className="text-center text-white">
             <p>Nenhuma imagem encontrada na galeria.</p>
@@ -45,21 +45,21 @@ const GallerySection: React.FC = () => {
   }
 
   return (
-    <section id="galeria" className="py-20 relative">
+    <section id="galeria" className="py-12 md:py-20 relative">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-16">
-            <h2 className="font-playfair text-4xl md:text-5xl font-bold text-white mb-6">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6">
               Galeria de <span className="text-brand-orange">Eventos</span>
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4">
               Veja alguns dos nossos trabalhos e se inspire para o seu próximo evento
             </p>
           </div>
 
           {/* Gallery grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {galleryImages.map((image) => (
               <div
                 key={image.id}
@@ -79,7 +79,7 @@ const GallerySection: React.FC = () => {
                 </div>
                 
                 {/* Card content */}
-                <div className="p-6">
+                <div className="p-4 md:p-6">
                   {image.categoria && (
                     <div className="mb-3">
                       <span className="inline-block bg-brand-orange/20 text-brand-orange text-xs px-3 py-1 rounded-full font-semibold">
@@ -113,7 +113,7 @@ const GallerySection: React.FC = () => {
           {/* Modal for enlarged image */}
           {selectedImage && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4">
-              <div className="relative max-w-4xl max-h-full">
+              <div className="relative max-w-4xl max-h-full w-full">
                 <button
                   onClick={() => setSelectedImage(null)}
                   className="absolute -top-4 -right-4 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors duration-300 z-10"
@@ -123,22 +123,22 @@ const GallerySection: React.FC = () => {
                 <img
                   src={selectedImage}
                   alt="Imagem ampliada"
-                  className="max-w-full max-h-full object-contain rounded-lg"
+                  className="max-w-full max-h-full object-contain rounded-lg mx-auto"
                 />
               </div>
             </div>
           )}
 
           {/* CTA */}
-          <div className="text-center mt-16">
-            <div className="glass-card p-8 max-w-2xl mx-auto">
-              <h3 className="font-playfair text-2xl font-semibold text-white mb-4">
+          <div className="text-center mt-12 md:mt-16">
+            <div className="glass-card p-6 md:p-8 max-w-2xl mx-auto">
+              <h3 className="font-playfair text-xl md:text-2xl font-semibold text-white mb-4">
                 Seu evento pode estar aqui!
               </h3>
-              <p className="text-gray-300 mb-6">
+              <p className="text-gray-300 mb-6 text-sm md:text-base">
                 Entre em contato e vamos criar juntos uma experiência única para sua celebração
               </p>
-              <button className="brand-button">
+              <button className="brand-button w-full sm:w-auto">
                 Começar Meu Projeto
               </button>
             </div>
