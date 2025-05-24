@@ -26,16 +26,16 @@ const HeroSection: React.FC = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
         style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1566417109195-b8cb00c3e5d5?q=80&w=2000&auto=format&fit=crop')`,
+          backgroundImage: `url('https://drinkerita.com.br/wp-content/uploads/2021/08/DEFUMACAO-COM-ERVAS-HERBACEAS.jpg')`,
         }}
       />
       
-      {/* Smoke/herbs image overlay */}
+      {/* Additional smoke/herbs image overlay for depth */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat z-5 opacity-30"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat z-5 opacity-20"
         style={{
-          backgroundImage: `url('https://drinkerita.com.br/wp-content/uploads/2021/08/DEFUMACAO-COM-ERVAS-HERBACEAS.jpg')`,
-          mixBlendMode: 'multiply'
+          backgroundImage: `url('https://images.unsplash.com/photo-1566417109195-b8cb00c3e5d5?q=80&w=2000&auto=format&fit=crop')`,
+          mixBlendMode: 'overlay'
         }}
       />
 
