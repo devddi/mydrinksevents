@@ -42,7 +42,7 @@ const HeroSection: React.FC = () => {
       <div className="relative z-20 container mx-auto px-4 py-8 text-center">
         <div className="max-w-4xl mx-auto">
           {/* Main heading */}
-          <div className="animate-fade-in-up">
+          <div className="animate-fade-in-up mt-16 sm:mt-20 md:mt-24 lg:mt-28">
             <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight px-2">
               Transforme seu evento com os{' '}
               <span className="text-brand-orange">melhores drinks</span>{' '}
