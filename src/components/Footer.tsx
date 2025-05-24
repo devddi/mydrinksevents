@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Phone, Mail, Instagram, MapPin, Heart } from 'lucide-react';
 
@@ -8,7 +7,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-gray-900/50 backdrop-blur-sm border-t border-white/10">
+    <footer className="border-t border-white/10" style={{ backgroundColor: '#181818' }}>
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
