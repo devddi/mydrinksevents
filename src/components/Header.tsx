@@ -33,7 +33,7 @@ const Header: React.FC = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <img 
-              src="https://vlriviouictrannhemnh.supabase.co/storage/v1/object/public/midiasOMD/fotosBebidas/logo.png" 
+              src="https://vlriviouictrannhemnh.supabase.co/storage/v1/object/public/midiasOMD/fotosBebidas/my.png" 
               alt="MyDrinks Logo" 
               className="w-8 h-8 md:w-10 md:h-10 object-contain"
             />
