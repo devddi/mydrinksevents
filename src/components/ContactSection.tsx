@@ -46,6 +46,17 @@ const ContactSection: React.FC = () => {
     }));
   };
 
+  const handleGuestsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    // Only allow positive integers
+    if (value === '' || (/^\d+$/.test(value) && parseInt(value) > 0)) {
+      setFormData(prev => ({
+        ...prev,
+        guests: value
+      }));
+    }
+  };
+
   const handleSelectChange = (value: string) => {
     setFormData(prev => ({
       ...prev,
@@ -190,12 +201,14 @@ const ContactSection: React.FC = () => {
                   Número de Convidados
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   name="guests"
                   value={formData.guests}
-                  onChange={handleInputChange}
+                  onChange={handleGuestsChange}
                   className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-brand-orange focus:outline-none transition-colors duration-300"
                   placeholder="Ex: 50"
+                  inputMode="numeric"
+                  pattern="\d+"
                 />
               </div>
               
