@@ -1,4 +1,3 @@
-
 "use client";
 import { useEffect, useRef } from "react";
 
@@ -19,13 +18,13 @@ function SplashCursor({
   BACK_COLOR = { r: 0.5, g: 0, b: 0 },
   TRANSPARENT = true,
 }) {
-  const canvasRef = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    function pointerPrototype() {
+    function pointerPrototype(this: any) {
       this.id = -1;
       this.texcoordX = 0;
       this.texcoordY = 0;
@@ -56,7 +55,7 @@ function SplashCursor({
       TRANSPARENT,
     };
 
-    let pointers = [new pointerPrototype()];
+    let pointers = [new (pointerPrototype as any)()];
 
     const { gl, ext } = getWebGLContext(canvas);
     if (!ext.supportLinearFiltering) {
@@ -64,7 +63,7 @@ function SplashCursor({
       config.SHADING = false;
     }
 
-    function getWebGLContext(canvas) {
+    function getWebGLContext(canvas: HTMLCanvasElement) {
       const params = {
         alpha: true,
         depth: false,
@@ -78,42 +77,42 @@ function SplashCursor({
         gl =
           canvas.getContext("webgl", params) ||
           canvas.getContext("experimental-webgl", params);
-      let halfFloat;
-      let supportLinearFiltering;
+      let halfFloat: any;
+      let supportLinearFiltering: any;
       if (isWebGL2) {
-        gl.getExtension("EXT_color_buffer_float");
-        supportLinearFiltering = gl.getExtension("OES_texture_float_linear");
+        gl!.getExtension("EXT_color_buffer_float");
+        supportLinearFiltering = gl!.getExtension("OES_texture_float_linear");
       } else {
-        halfFloat = gl.getExtension("OES_texture_half_float");
-        supportLinearFiltering = gl.getExtension(
+        halfFloat = gl!.getExtension("OES_texture_half_float");
+        supportLinearFiltering = gl!.getExtension(
           "OES_texture_half_float_linear"
         );
       }
-      gl.clearColor(0.0, 0.0, 0.0, 1.0);
+      gl!.clearColor(0.0, 0.0, 0.0, 1.0);
       const halfFloatTexType = isWebGL2
-        ? gl.HALF_FLOAT
+        ? gl!.HALF_FLOAT
         : halfFloat && halfFloat.HALF_FLOAT_OES;
-      let formatRGBA;
-      let formatRG;
-      let formatR;
+      let formatRGBA: any;
+      let formatRG: any;
+      let formatR: any;
 
       if (isWebGL2) {
         formatRGBA = getSupportedFormat(
-          gl,
-          gl.RGBA16F,
-          gl.RGBA,
+          gl!,
+          gl!.RGBA16F,
+          gl!.RGBA,
           halfFloatTexType
         );
-        formatRG = getSupportedFormat(gl, gl.RG16F, gl.RG, halfFloatTexType);
-        formatR = getSupportedFormat(gl, gl.R16F, gl.RED, halfFloatTexType);
+        formatRG = getSupportedFormat(gl!, gl!.RG16F, gl!.RG, halfFloatTexType);
+        formatR = getSupportedFormat(gl!, gl!.R16F, gl!.RED, halfFloatTexType);
       } else {
-        formatRGBA = getSupportedFormat(gl, gl.RGBA, gl.RGBA, halfFloatTexType);
-        formatRG = getSupportedFormat(gl, gl.RGBA, gl.RGBA, halfFloatTexType);
-        formatR = getSupportedFormat(gl, gl.RGBA, gl.RGBA, halfFloatTexType);
+        formatRGBA = getSupportedFormat(gl!, gl!.RGBA, gl!.RGBA, halfFloatTexType);
+        formatRG = getSupportedFormat(gl!, gl!.RGBA, gl!.RGBA, halfFloatTexType);
+        formatR = getSupportedFormat(gl!, gl!.RGBA, gl!.RGBA, halfFloatTexType);
       }
 
       return {
-        gl,
+        gl: gl!,
         ext: {
           formatRGBA,
           formatRG,
@@ -124,13 +123,13 @@ function SplashCursor({
       };
     }
 
-    function getSupportedFormat(gl, internalFormat, format, type) {
+    function getSupportedFormat(gl: WebGLRenderingContext | WebGL2RenderingContext, internalFormat: any, format: any, type: any) {
       if (!supportRenderTextureFormat(gl, internalFormat, format, type)) {
         switch (internalFormat) {
-          case gl.R16F:
-            return getSupportedFormat(gl, gl.RG16F, gl.RG, type);
-          case gl.RG16F:
-            return getSupportedFormat(gl, gl.RGBA16F, gl.RGBA, type);
+          case (gl as WebGL2RenderingContext).R16F:
+            return getSupportedFormat(gl, (gl as WebGL2RenderingContext).RG16F, (gl as WebGL2RenderingContext).RG, type);
+          case (gl as WebGL2RenderingContext).RG16F:
+            return getSupportedFormat(gl, (gl as WebGL2RenderingContext).RGBA16F, gl.RGBA, type);
           default:
             return null;
         }
@@ -141,7 +140,7 @@ function SplashCursor({
       };
     }
 
-    function supportRenderTextureFormat(gl, internalFormat, format, type) {
+    function supportRenderTextureFormat(gl: WebGLRenderingContext | WebGL2RenderingContext, internalFormat: any, format: any, type: any) {
       const texture = gl.createTexture();
       gl.bindTexture(gl.TEXTURE_2D, texture);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
@@ -173,14 +172,20 @@ function SplashCursor({
     }
 
     class Material {
-      constructor(vertexShader, fragmentShaderSource) {
+      vertexShader: any;
+      fragmentShaderSource: any;
+      programs: any;
+      activeProgram: any;
+      uniforms: any;
+
+      constructor(vertexShader: any, fragmentShaderSource: any) {
         this.vertexShader = vertexShader;
         this.fragmentShaderSource = fragmentShaderSource;
         this.programs = [];
         this.activeProgram = null;
         this.uniforms = [];
       }
-      setKeywords(keywords) {
+      setKeywords(keywords: any) {
         let hash = 0;
         for (let i = 0; i < keywords.length; i++) hash += hashCode(keywords[i]);
         let program = this.programs[hash];
@@ -203,7 +208,10 @@ function SplashCursor({
     }
 
     class Program {
-      constructor(vertexShader, fragmentShader) {
+      uniforms: any;
+      program: any;
+
+      constructor(vertexShader: any, fragmentShader: any) {
         this.uniforms = {};
         this.program = createProgram(vertexShader, fragmentShader);
         this.uniforms = getUniforms(this.program);
@@ -213,40 +221,40 @@ function SplashCursor({
       }
     }
 
-    function createProgram(vertexShader, fragmentShader) {
+    function createProgram(vertexShader: any, fragmentShader: any) {
       let program = gl.createProgram();
-      gl.attachShader(program, vertexShader);
-      gl.attachShader(program, fragmentShader);
-      gl.linkProgram(program);
-      if (!gl.getProgramParameter(program, gl.LINK_STATUS))
+      gl.attachShader(program!, vertexShader);
+      gl.attachShader(program!, fragmentShader);
+      gl.linkProgram(program!);
+      if (!gl.getProgramParameter(program!, gl.LINK_STATUS))
         console.trace(gl.getProgramInfoLog(program));
       return program;
     }
 
-    function getUniforms(program) {
-      let uniforms = [];
+    function getUniforms(program: any) {
+      let uniforms: any = [];
       let uniformCount = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
       for (let i = 0; i < uniformCount; i++) {
-        let uniformName = gl.getActiveUniform(program, i).name;
+        let uniformName = gl.getActiveUniform(program, i)!.name;
         uniforms[uniformName] = gl.getUniformLocation(program, uniformName);
       }
       return uniforms;
     }
 
-    function compileShader(type, source, keywords) {
+    function compileShader(type: any, source: any, keywords?: any) {
       source = addKeywords(source, keywords);
       const shader = gl.createShader(type);
-      gl.shaderSource(shader, source);
-      gl.compileShader(shader);
-      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS))
+      gl.shaderSource(shader!, source);
+      gl.compileShader(shader!);
+      if (!gl.getShaderParameter(shader!, gl.COMPILE_STATUS))
         console.trace(gl.getShaderInfoLog(shader));
       return shader;
     }
 
-    function addKeywords(source, keywords) {
+    function addKeywords(source: any, keywords?: any) {
       if (!keywords) return source;
       let keywordsString = "";
-      keywords.forEach((keyword) => {
+      keywords.forEach((keyword: any) => {
         keywordsString += "#define " + keyword + "\n";
       });
       return keywordsString + source;
@@ -341,7 +349,7 @@ function SplashCursor({
           #endif
 
           float a = max(c.r, max(c.g, c.b));
-          gl_FragColor = vec4(c, a);
+          gl_FragColor = vec4(c, a * 0.5);
       }
     `;
 
@@ -1074,7 +1082,7 @@ function SplashCursor({
     }
 
     function generateColor() {
-      // Aplicando a cor #FF5400 com variações
+      // Usando cor #FF5400 com variações
       const baseColor = { r: 1.0, g: 0.329, b: 0.0 }; // #FF5400 normalizado
       
       // Adicionando pequenas variações para manter o dinamismo
@@ -1083,7 +1091,7 @@ function SplashCursor({
       const g = Math.max(0, Math.min(1, baseColor.g + (Math.random() - 0.5) * variation));
       const b = Math.max(0, Math.min(1, baseColor.b + (Math.random() - 0.5) * variation));
       
-      return { r: r * 0.8, g: g * 0.8, b: b * 0.8 };
+      return { r: r * 0.3, g: g * 0.3, b: b * 0.3 }; // Reduzindo intensidade para 30%
     }
 
     function HSVtoRGB(h, s, v) {
@@ -1257,7 +1265,7 @@ function SplashCursor({
   ]);
 
   return (
-    <div className="fixed top-0 left-0 z-50 pointer-events-none">
+    <div className="fixed top-0 left-0 z-0 pointer-events-none opacity-50">
       <canvas ref={canvasRef} id="fluid" className="w-screen h-screen" />
     </div>
   );

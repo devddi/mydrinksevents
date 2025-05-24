@@ -14,13 +14,13 @@ import Footer from '@/components/Footer';
 const Index = () => {
   return (
     <div className="min-h-screen relative overflow-x-hidden" style={{ backgroundColor: '#181818' }}>
+      {/* Splash cursor effect - behind everything */}
+      <SplashCursor />
+      
       {/* Animated smoke background */}
       <SmokeAnimation />
       
-      {/* Splash cursor effect */}
-      <SplashCursor />
-      
-      {/* Main content */}
+      {/* Main content - above cursor effect */}
       <div className="relative z-10">
         <Header />
         <HeroSection />
