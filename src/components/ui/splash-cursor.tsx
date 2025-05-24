@@ -3,43 +3,80 @@ import React, { useEffect, useRef } from 'react';
 
 export const SplashCursor: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const contextRef = useRef<WebGL2RenderingContext | null>(null);
+  const splashesRef = useRef<Array<{ x: number; y: number; size: number; opacity: number; life: number }>>([]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // Try to get WebGL2 context first, fallback to WebGL1
-    const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
-    if (!gl) {
-      console.warn('WebGL not supported');
-      return;
-    }
-
-    contextRef.current = gl as WebGL2RenderingContext;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
     // Set canvas size
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      gl.viewport(0, 0, canvas.width, canvas.height);
     };
 
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Simple splash effect
+    // Create splash effect on mouse move
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / canvas.width * 2 - 1;
-      const y = -((e.clientY - rect.top) / canvas.height * 2 - 1);
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
       
-      // Simple color effect
-      gl.clearColor(0.1, 0.1, 0.1, 0.05);
-      gl.clear(gl.COLOR_BUFFER_BIT);
+      // Add new splash
+      splashesRef.current.push({
+        x,
+        y,
+        size: Math.random() * 30 + 10,
+        opacity: 0.8,
+        life: 1.0
+      });
+
+      // Limit number of splashes
+      if (splashesRef.current.length > 20) {
+        splashesRef.current.shift();
+      }
+    };
+
+    // Animation loop
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      splashesRef.current.forEach((splash, index) => {
+        // Update splash
+        splash.life -= 0.02;
+        splash.size += 0.5;
+        splash.opacity = splash.life * 0.8;
+
+        if (splash.life <= 0) {
+          splashesRef.current.splice(index, 1);
+          return;
+        }
+
+        // Draw splash with orange gradient
+        const gradient = ctx.createRadialGradient(
+          splash.x, splash.y, 0,
+          splash.x, splash.y, splash.size
+        );
+        gradient.addColorStop(0, `rgba(255, 84, 0, ${splash.opacity})`);
+        gradient.addColorStop(0.5, `rgba(255, 84, 0, ${splash.opacity * 0.5})`);
+        gradient.addColorStop(1, `rgba(255, 84, 0, 0)`);
+
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(splash.x, splash.y, splash.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      requestAnimationFrame(animate);
     };
 
     canvas.addEventListener('mousemove', handleMouseMove);
+    animate();
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
