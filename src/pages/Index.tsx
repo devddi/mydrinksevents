@@ -1,6 +1,7 @@
 
 import React from 'react';
 import SmokeAnimation from '@/components/SmokeAnimation';
+import { SplashCursor } from '@/components/ui/splash-cursor';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
@@ -15,6 +16,9 @@ const Index = () => {
     <div className="min-h-screen relative overflow-x-hidden" style={{ backgroundColor: '#181818' }}>
       {/* Animated smoke background */}
       <SmokeAnimation />
+      
+      {/* Splash cursor effect */}
+      <SplashCursor />
       
       {/* Main content */}
       <div className="relative z-10">
