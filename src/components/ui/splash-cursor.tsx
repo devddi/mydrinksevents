@@ -28,11 +28,11 @@ export const SplashCursor: React.FC = () => {
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       
-      // Add new splash
+      // Add new splash - 100% bigger (was 20 + 15, now 40 + 30)
       splashesRef.current.push({
         x,
         y,
-        size: Math.random() * 20 + 15,
+        size: Math.random() * 40 + 30,
         opacity: 0.5, // 50% less opacity (was 1.0)
         life: 1.0
       });
@@ -52,7 +52,7 @@ export const SplashCursor: React.FC = () => {
         
         // Update splash - 30% slower (was 0.015, now ~0.0105)
         splash.life -= 0.0105;
-        splash.size += 0.56; // 30% slower (was 0.8)
+        splash.size += 1.12; // 100% bigger growth (was 0.56, now 1.12)
         splash.opacity = splash.life * 0.5; // 50% less opacity
 
         if (splash.life <= 0) {
