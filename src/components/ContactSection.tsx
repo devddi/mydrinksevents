@@ -26,6 +26,26 @@ const ContactSection: React.FC = () => {
     }));
   };
 
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/\D/g, ''); // Remove all non-digits
+    
+    // Apply phone mask (88) 98888-8888
+    if (value.length <= 11) {
+      if (value.length > 6) {
+        value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
+      } else if (value.length > 2) {
+        value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+      } else if (value.length > 0) {
+        value = `(${value}`;
+      }
+    }
+    
+    setFormData(prev => ({
+      ...prev,
+      phone: value
+    }));
+  };
+
   const handleSelectChange = (value: string) => {
     setFormData(prev => ({
       ...prev,
@@ -124,7 +144,8 @@ const ContactSection: React.FC = () => {
                     type="tel"
                     name="phone"
                     value={formData.phone}
-                    onChange={handleInputChange}
+                    onChange={handlePhoneChange}
+                    maxLength={15}
                     className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-brand-orange focus:outline-none transition-colors duration-300"
                     placeholder="(88) 98888-8888"
                   />
