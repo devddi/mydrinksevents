@@ -78,7 +78,7 @@ const HeroSection: React.FC = () => {
           <div className="animate-fade-in-up grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto px-4" style={{ animationDelay: '0.6s' }}>
             <div className="glass-card p-4 md:p-6 text-center">
               <Sparkles className="text-brand-orange mx-auto mb-2" size={28} />
-              <div className="text-xl md:text-2xl font-bold text-white mb-1">500+</div>
+              <div className="text-xl md:text-2xl font-bold text-white mb-1">100+</div>
               <div className="text-sm md:text-base text-gray-300">Eventos Realizados</div>
             </div>
             <div className="glass-card p-4 md:p-6 text-center">
@@ -88,7 +88,7 @@ const HeroSection: React.FC = () => {
             </div>
             <div className="glass-card p-4 md:p-6 text-center">
               <Users className="text-brand-orange mx-auto mb-2" size={28} />
-              <div className="text-xl md:text-2xl font-bold text-white mb-1">10k+</div>
+              <div className="text-xl md:text-2xl font-bold text-white mb-1">3k+</div>
               <div className="text-sm md:text-base text-gray-300">Pessoas Atendidas</div>
             </div>
           </div>
