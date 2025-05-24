@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
               </p>
               <div className="flex space-x-4">
                 <a 
-                  href="tel:+5511999999999" 
+                  href="tel:+5588988940894" 
                   className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-brand-orange/20 transition-colors duration-300"
                 >
                   <Phone className="text-brand-orange" size={18} />
@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
                   <Mail className="text-brand-orange" size={18} />
                 </a>
                 <a 
-                  href="https://instagram.com/mydrinks" 
+                  href="https://instagram.com/mydrinksevents" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-brand-orange/20 transition-colors duration-300"
