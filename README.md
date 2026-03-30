@@ -1,58 +1,10 @@
-# Welcome to your Lovable project
+# My Drinks Events
 
-## Project info
+Este projeto é uma aplicação web construída com tecnologias modernas de frontend.
 
-**URL**: https://lovable.dev/projects/5e2c8b1d-7408-49a6-9c2d-72909a748120
+## Tecnologias Utilizadas
 
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/5e2c8b1d-7408-49a6-9c2d-72909a748120) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
+Este projeto foi desenvolvido com:
 
 - Vite
 - TypeScript
@@ -60,14 +12,44 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
-## How can I deploy this project?
+## Pré-requisitos
 
-Simply open [Lovable](https://lovable.dev/projects/5e2c8b1d-7408-49a6-9c2d-72909a748120) and click on Share -> Publish.
+O único requisito para rodar este projeto é ter o Node.js e o npm instalados. Recomendamos a instalação através do [nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
 
-## Can I connect a custom domain to my Lovable project?
+## Como Começar
 
-Yes, you can!
+Siga os passos abaixo para configurar o ambiente de desenvolvimento local:
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+```sh
+# Passo 1: Clone o repositório usando a URL do Git do projeto
+git clone <URL_DO_SEU_GIT>
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+# Passo 2: Navegue até o diretório do projeto
+cd mydrinksevents
+
+# Passo 3: Instale as dependências necessárias
+npm install
+
+# Passo 4: Inicie o servidor de desenvolvimento com atualização automática (auto-reloading)
+npm run dev
+```
+
+## Desenvolvimento
+
+**Usando a sua IDE preferida**
+
+Você pode trabalhar localmente usando a IDE de sua preferência. Basta clonar este repositório, fazer suas alterações e enviar os commits (push). 
+
+**Usando o GitHub Codespaces**
+
+- Navegue até a página principal do seu repositório.
+- Clique no botão "Code" no canto superior direito.
+- Selecione a aba "Codespaces".
+- Clique em "New codespace" para iniciar um novo ambiente Codespace.
+- Edite os arquivos diretamente no Codespace e faça o commit/push de suas alterações quando terminar.
+
+**Editando diretamente no GitHub**
+
+- Navegue até os arquivos desejados.
+- Clique no botão "Edit" (ícone de lápis) no canto superior direito da visualização do arquivo.
+- Faça suas alterações e faça o commit delas.
