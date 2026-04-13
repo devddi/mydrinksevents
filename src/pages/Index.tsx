@@ -1,4 +1,3 @@
-
 import React from 'react';
 import SmokeAnimation from '@/components/SmokeAnimation';
 import { SplashCursor } from '@/components/ui/splash-cursor';
@@ -6,9 +5,9 @@ import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
 import ServicesSection from '@/components/ServicesSection';
-import GallerySection from '@/components/GallerySection';
-import TestimonialsSection from '@/components/TestimonialsSection';
-import ContactSection from '@/components/ContactSection';
+import PhilosophySection from '@/components/PhilosophySection';
+import ProtocolSection from '@/components/ProtocolSection';
+import GetStarted from '@/components/GetStarted';
 import Footer from '@/components/Footer';
 
 const Index = () => {
@@ -21,14 +20,14 @@ const Index = () => {
       <SmokeAnimation />
       
       {/* Main content - above cursor effect */}
-      <div className="relative z-10">
+      <div className="relative z-10 flex flex-col">
         <Header />
         <HeroSection />
+        <PhilosophySection />
         <AboutSection />
         <ServicesSection />
-        <GallerySection />
-        <TestimonialsSection />
-        <ContactSection />
+        <ProtocolSection />
+        <GetStarted />
         <Footer />
       </div>
     </div>

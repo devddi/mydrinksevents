@@ -1,28 +1,38 @@
-
-import React from 'react';
-import { Sparkles, Award, Users } from 'lucide-react';
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
 
 const HeroSection: React.FC = () => {
-  const scrollToServices = () => {
-    const element = document.getElementById('servicos');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const heroRef = useRef<HTMLElement>(null);
 
-  const scrollToContact = () => {
-    const element = document.getElementById('contato');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Reveal text with a more dramatic entry
+      gsap.fromTo(
+        '.hero-element',
+        { y: 60, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.15,
+          duration: 1.5,
+          ease: 'power4.out',
+          delay: 0.2
+        }
+      );
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const whatsappUrl = "https://wa.me/5588988940894?text=Olá,%20tenho%20interesse%20em%20saber%20mais";
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden" style={{ backgroundColor: '#181818' }}>
-      {/* Background overlay */}
-      <div className="absolute inset-0 z-10" style={{ backgroundColor: 'rgba(24, 24, 24, 0.7)' }} />
-      
-      {/* Hero background images */}
+    <section 
+      ref={heroRef}
+      id="home" 
+      className="relative h-[100dvh] flex items-end justify-start overflow-hidden bg-[#0D0D12]"
+    >
+      {/* Background Image - Updated to user's URL */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
         style={{
@@ -30,70 +40,66 @@ const HeroSection: React.FC = () => {
         }}
       />
       
-      {/* Additional smoke/herbs image overlay for depth */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat z-5 opacity-20"
-        style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1566417109195-b8cb00c3e5d5?q=80&w=2000&auto=format&fit=crop')`,
-          mixBlendMode: 'overlay'
-        }}
-      />
+      {/* Dynamic Cinematic Overlays */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#0D0D12] via-[#0D0D12]/40 to-transparent" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-r from-[#0D0D12]/60 via-transparent to-transparent" />
 
-      <div className="relative z-20 container mx-auto px-4 py-8 text-center">
-        <div className="max-w-4xl mx-auto">
-          {/* Main heading */}
-          <div className="animate-fade-in-up mt-16 sm:mt-20 md:mt-24 lg:mt-28">
-            <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight px-2">
-              Transforme seu evento com os{' '}
-              <span className="text-brand-orange">melhores drinks</span>{' '}
-              e mesas gourmet
-            </h1>
-          </div>
+      <div className="relative z-20 container mx-auto px-6 pb-20 md:pb-32 lg:pb-40">
+        <div className="max-w-4xl">
+          <p className="hero-element text-sm md:text-base font-inter text-brand-orange uppercase tracking-[0.3em] mb-6 font-bold">
+            Alta Coquetelaria & Gastronomia
+          </p>
+          
+          <h1 className="hero-element flex flex-col font-bold text-white leading-[0.9] mb-12">
+            <span className="font-inter text-4xl md:text-6xl lg:text-8xl tracking-tighter">
+              Sua celebração encontra a
+            </span>
+            <span className="text-drama text-7xl md:text-[10rem] lg:text-[13rem] mt-6 block">
+              Perfeição.
+            </span>
+          </h1>
 
-          {/* Subtitle */}
-          <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed px-4">
-              Criamos experiências únicas com drinks personalizados, coquetéis e mesas gourmet 
-              para casamentos, eventos corporativos e celebrações especiais
-            </p>
-          </div>
-
-          {/* CTA Buttons */}
-          <div className="animate-fade-in-up flex flex-col gap-3 sm:gap-4 justify-center mb-8 md:mb-12 px-4" style={{ animationDelay: '0.4s' }}>
-            <button
-              onClick={scrollToContact}
-              className="brand-button text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto"
+          <div className="hero-element flex flex-col sm:flex-row gap-6">
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="brand-button text-base md:text-lg group py-5 px-10"
             >
-              Solicitar Orçamento
-            </button>
+              <span className="relative z-10 flex items-center gap-3">
+                Solicitar Orçamento
+                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </span>
+              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+            </a>
+            
             <button
-              onClick={scrollToServices}
-              className="glass-button text-white text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 font-semibold w-full sm:w-auto"
+               onClick={() => document.getElementById('experiencias')?.scrollIntoView({ behavior: 'smooth' })}
+               className="text-white font-inter font-semibold flex items-center gap-2 hover:text-brand-orange opacity-70 hover:opacity-100 transition-all px-4"
             >
-              Conhecer Serviços
+              Conhecer Experiências
+              <span className="w-8 h-px bg-white/30" />
             </button>
-          </div>
-
-          {/* Stats */}
-          <div className="animate-fade-in-up grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto px-4" style={{ animationDelay: '0.6s' }}>
-            <div className="glass-card p-4 md:p-6 text-center">
-              <Sparkles className="text-brand-orange mx-auto mb-2" size={28} />
-              <div className="text-xl md:text-2xl font-bold text-white mb-1">100+</div>
-              <div className="text-sm md:text-base text-gray-300">Eventos Realizados</div>
-            </div>
-            <div className="glass-card p-4 md:p-6 text-center">
-              <Award className="text-brand-orange mx-auto mb-2" size={28} />
-              <div className="text-xl md:text-2xl font-bold text-white mb-1">5★</div>
-              <div className="text-sm md:text-base text-gray-300">Avaliação dos Clientes</div>
-            </div>
-            <div className="glass-card p-4 md:p-6 text-center">
-              <Users className="text-brand-orange mx-auto mb-2" size={28} />
-              <div className="text-xl md:text-2xl font-bold text-white mb-1">3k+</div>
-              <div className="text-sm md:text-base text-gray-300">Pessoas Atendidas</div>
-            </div>
           </div>
         </div>
       </div>
+
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-10 right-10 z-20 hidden md:block">
+        <div className="flex flex-col items-center gap-4">
+          <span className="text-[10px] font-mono text-gray-500 uppercase vertical-text tracking-widest mb-2">SCROLL_DOWN</span>
+          <div className="w-px h-16 bg-gradient-to-t from-brand-orange to-transparent" />
+        </div>
+      </div>
+
+      <style>{`
+        .vertical-text {
+          writing-mode: vertical-rl;
+        }
+      `}</style>
+
     </section>
   );
 };

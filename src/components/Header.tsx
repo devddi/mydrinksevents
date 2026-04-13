@@ -1,13 +1,13 @@
-
 import React, { useState, useEffect } from 'react';
-import { Phone, Mail, Instagram, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
-const Header: React.FC = () => {
+const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
+      // Transition to blurred background after scrolling past a threshold
       setIsScrolled(window.scrollY > 50);
     };
 
@@ -15,156 +15,86 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-    setIsMobileMenuOpen(false);
-  };
+  const navLinks = [
+    { name: 'O Manifesto', href: '#sobre' },
+    { name: 'Experiências', href: '#experiencias' },
+    { name: 'Protocolo', href: '#protocolo' },
+  ];
 
   return (
-    <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'glass-card shadow-lg' : 'bg-transparent'
-      }`}
-    >
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <img 
-              src="https://vlriviouictrannhemnh.supabase.co/storage/v1/object/public/midiasOMD/fotosBebidas/my.png" 
-              alt="MyDrinks Logo" 
-              className="w-8 h-8 md:w-10 md:h-10 object-contain"
-            />
-            <h1 className="font-playfair text-xl md:text-2xl font-bold text-white">
-              MyDrinks<span className="text-brand-orange">!</span>
-            </h1>
-          </div>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
-            <button
-              onClick={() => scrollToSection('home')}
-              className="text-white hover:text-brand-orange transition-colors duration-300"
-            >
-              Início
-            </button>
-            <button
-              onClick={() => scrollToSection('sobre')}
-              className="text-white hover:text-brand-orange transition-colors duration-300"
-            >
-              Sobre
-            </button>
-            <button
-              onClick={() => scrollToSection('servicos')}
-              className="text-white hover:text-brand-orange transition-colors duration-300"
-            >
-              Serviços
-            </button>
-            <button
-              onClick={() => scrollToSection('galeria')}
-              className="text-white hover:text-brand-orange transition-colors duration-300"
-            >
-              Galeria
-            </button>
-            <button
-              onClick={() => scrollToSection('contato')}
-              className="text-white hover:text-brand-orange transition-colors duration-300"
-            >
-              Contato
-            </button>
-          </nav>
-
-          <div className="flex items-center space-x-2 md:space-x-4">
-            {/* Desktop Contact Info */}
-            <div className="hidden xl:flex items-center space-x-4 text-sm text-gray-300">
-              <div className="flex items-center space-x-1">
-                <Phone size={16} className="text-brand-orange" />
-                <span>(88) 98894-0894</span>
-              </div>
-              <div className="flex items-center space-x-1">
-                <Instagram size={16} className="text-brand-orange" />
-                <span>@mydrinksevents</span>
-              </div>
-            </div>
-
-            {/* CTA Button - Hidden on mobile */}
-            <button
-              onClick={() => scrollToSection('contato')}
-              className="hidden md:block brand-button text-sm lg:text-base px-4 lg:px-6 py-2 lg:py-3"
-            >
-              Solicitar Orçamento
-            </button>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden text-white p-2"
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center py-6 px-4 md:px-0 transition-all duration-500">
+      <div 
+        className={`w-full max-w-5xl flex items-center justify-between px-6 md:px-8 py-4 rounded-full transition-all duration-500 ${
+          isScrolled 
+            ? 'bg-[#181818]/70 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50' 
+            : 'bg-transparent border border-transparent'
+        }`}
+      >
+        {/* Logo */}
+        <div className="flex items-center">
+          <a href="#home" className="text-xl md:text-2xl font-playfair font-bold text-white tracking-wide">
+            My <span className="text-brand-orange">Drinks!</span>
+          </a>
         </div>
 
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden mt-4 pb-4 glass-card">
-            <nav className="flex flex-col space-y-4 p-4">
-              <button
-                onClick={() => scrollToSection('home')}
-                className="text-white hover:text-brand-orange transition-colors duration-300 text-left py-2"
-              >
-                Início
-              </button>
-              <button
-                onClick={() => scrollToSection('sobre')}
-                className="text-white hover:text-brand-orange transition-colors duration-300 text-left py-2"
-              >
-                Sobre
-              </button>
-              <button
-                onClick={() => scrollToSection('servicos')}
-                className="text-white hover:text-brand-orange transition-colors duration-300 text-left py-2"
-              >
-                Serviços
-              </button>
-              <button
-                onClick={() => scrollToSection('galeria')}
-                className="text-white hover:text-brand-orange transition-colors duration-300 text-left py-2"
-              >
-                Galeria
-              </button>
-              <button
-                onClick={() => scrollToSection('contato')}
-                className="text-white hover:text-brand-orange transition-colors duration-300 text-left py-2"
-              >
-                Contato
-              </button>
-              
-              {/* Mobile CTA Button */}
-              <button
-                onClick={() => scrollToSection('contato')}
-                className="brand-button text-center mt-4"
-              >
-                Solicitar Orçamento
-              </button>
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <a 
+              key={link.name} 
+              href={link.href}
+              className="text-sm font-inter text-gray-300 hover:text-white interactive-lift"
+            >
+              {link.name}
+            </a>
+          ))}
+        </nav>
 
-              {/* Mobile Contact Info */}
-              <div className="flex flex-col space-y-2 pt-4 border-t border-white/10 text-sm text-gray-300">
-                <div className="flex items-center space-x-2">
-                  <Phone size={16} className="text-brand-orange" />
-                  <span>(88) 98894-0894</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Instagram size={16} className="text-brand-orange" />
-                  <span>@mydrinksevents</span>
-                </div>
-              </div>
-            </nav>
-          </div>
-        )}
+        {/* Desktop CTA */}
+        <div className="hidden md:block">
+          <a 
+            href="https://wa.me/5588988940894?text=Olá,%20tenho%20interesse%20em%20saber%20mais"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-inter font-semibold text-brand-orange hover:text-white transition-colors bg-white/5 hover:bg-brand-orange/20 px-5 py-2 rounded-full border border-white/10 interactive-lift"
+          >
+            Solicitar Orçamento
+          </a>
+        </div>
+
+        {/* Mobile menu button */}
+        <button 
+          className="md:hidden text-white"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
+
+      {/* Mobile Nav */}
+      {isMobileMenuOpen && (
+        <div className="absolute top-24 left-4 right-4 bg-[#181818]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col gap-4 shadow-2xl md:hidden">
+          {navLinks.map((link) => (
+            <a 
+              key={link.name} 
+              href={link.href}
+              className="text-lg font-inter text-gray-200 py-2 border-b border-white/5"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              {link.name}
+            </a>
+          ))}
+          <button 
+            onClick={() => {
+              setIsMobileMenuOpen(false);
+              document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="w-full mt-4 bg-brand-orange text-white font-semibold py-3 rounded-xl"
+          >
+            Acessar Agenda
+          </button>
+        </div>
+      )}
     </header>
   );
 };

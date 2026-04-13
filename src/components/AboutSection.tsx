@@ -1,97 +1,106 @@
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import React from 'react';
-import { Heart, Star, Clock, Shield } from 'lucide-react';
+gsap.registerPlugin(ScrollTrigger);
 
 const AboutSection: React.FC = () => {
-  const features = [
-    {
-      icon: Heart,
-      title: 'Paixão pelos Detalhes',
-      description: 'Cada drink e prato é preparado com carinho e atenção aos mínimos detalhes'
-    },
-    {
-      icon: Star,
-      title: 'Qualidade Premium',
-      description: 'Ingredientes selecionados e apresentação impecável em todos os nossos serviços'
-    },
-    {
-      icon: Clock,
-      title: 'Pontualidade',
-      description: 'Chegamos sempre no horário combinado, garantindo que seu evento seja perfeito'
-    },
-    {
-      icon: Shield,
-      title: 'Confiança',
-      description: 'Mais de 1 ano transformando eventos em experiências inesquecíveis'
-    }
-  ];
+  const sectionRef = useRef<HTMLElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Contrast statement animation (Split-like effect per line)
+      gsap.fromTo(
+        '.contrast-line',
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.15,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 70%',
+          },
+        }
+      );
+      
+      // Image fade
+      gsap.fromTo(
+        '.about-image',
+        { scale: 0.9, opacity: 0 },
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 1.2,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '.about-image',
+            start: 'top 80%',
+          },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section id="sobre" className="py-20 relative">
-      <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <h2 className="font-playfair text-4xl md:text-5xl font-bold text-white mb-6">
-              Sobre a <span className="text-brand-orange">MyDrinks!</span>
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Somos especialistas em criar experiências gastronômicas únicas que transformam 
-              qualquer evento em uma celebração memorável
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-            {/* Text content */}
-            <div className="space-y-6">
-              <div className="glass-card p-8">
-                <h3 className="font-playfair text-2xl font-semibold text-white mb-4">
-                  Nossa História
-                </h3>
-                <p className="text-gray-300 leading-relaxed mb-4">
-                  A MyDrinks! nasceu da paixão por criar momentos especiais através da gastronomia. 
-                  Fundada em 2024, começamos com o sonho de elevar o padrão de drinks e mesas gurmet 
-                  para eventos em Sobral e região.
-                </p>
-                <p className="text-gray-300 leading-relaxed">
-                  Hoje, somos referência em qualidade e inovação, atendendo desde casamentos íntimos 
-                  até grandes eventos corporativos, sempre com o mesmo compromisso: superar expectativas 
-                  e criar experiências inesquecíveis.
-                </p>
-              </div>
+    <section ref={sectionRef} id="sobre" className="relative py-32 bg-[#0D0D12] overflow-hidden">
+      {/* Background Texture */}
+      <div 
+        className="absolute inset-0 opacity-10 bg-cover bg-center pointer-events-none"
+        style={{ backgroundImage: `url('https://images.unsplash.com/photo-1502814408796-01589fd7eb0a?q=80&w=2000&auto=format&fit=crop')` }}
+      />
+      
+      <div className="container relative z-10 mx-auto px-4 max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          
+          {/* Manifesto & History */}
+          <div ref={textRef} className="space-y-12">
+            <div>
+              <p className="contrast-line text-lg md:text-xl text-gray-400 font-inter mb-4">
+                Para muitos, um evento é apenas uma data.
+              </p>
+              <h2 className="contrast-line text-4xl md:text-6xl font-bold text-white tracking-tight leading-tight">
+                Para nós, é uma <span className="text-drama text-5xl md:text-7xl block mt-2">Experiência em Movimento.</span>
+              </h2>
             </div>
-
-            {/* Image */}
-            <div className="relative">
-              <div className="glass-card p-4">
-                <img
-                  src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=800&auto=format&fit=crop"
-                  alt="Equipe MyDrinks preparando drinks"
-                  className="w-full h-80 object-cover rounded-lg"
-                />
-              </div>
+            
+            <div className="space-y-6 text-gray-300 font-inter text-base md:text-lg leading-relaxed contrast-line">
+              <p>
+                A <strong>My Drinks</strong> nasceu da união de Thaynara, Neto e seu primo. 
+                De um pub local e da paixão por festas, entendemos que não basta saber as receitas — é preciso sentir o ritmo e a energia 
+                que fazem uma celebração acontecer. Mais do que servir, nosso olhar é para encantar e surpreender.
+              </p>
+              <p>
+                Evoluímos além do bar: hoje criamos experiências completas, incluindo ilhas gastronômicas pensadas para harmonizar 
+                com cada momento. Em abril de 2026, com uma marca mais "clean" e elegante, inauguramos nosso espaço físico 
+                para realizar degustações e planejar todos os detalhes junto com você.
+              </p>
+              <p className="font-semibold text-white">
+                Porque, para a My Drinks, não existe evento parado. Existe memória sendo criada.
+              </p>
             </div>
           </div>
 
-          {/* Features grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className="glass-card p-6 text-center group hover:bg-white/10 transition-all duration-300"
-              >
-                <div className="w-16 h-16 bg-brand-orange/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <feature.icon className="text-brand-orange" size={28} />
-                </div>
-                <h4 className="font-semibold text-white mb-2 text-lg">
-                  {feature.title}
-                </h4>
-                <p className="text-gray-300 text-sm leading-relaxed">
-                  {feature.description}
-                </p>
-              </div>
-            ))}
+          {/* Photo Space */}
+          <div className="about-image relative w-full aspect-[4/5] cinematic-container border border-white/10 group">
+            <div className="absolute inset-0 bg-brand-orange/20 mix-blend-overlay z-10 group-hover:bg-brand-orange/10 transition-colors duration-500" />
+            <img 
+              src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=800&auto=format&fit=crop" 
+              alt="My Drinks Equipe e Experiência" 
+              className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
+            />
+            {/* Tag/Label */}
+            <div className="absolute bottom-6 left-6 z-20 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 flex items-center gap-3">
+              <span className="w-2 h-2 rounded-full bg-brand-orange animate-pulse" />
+              <span className="text-sm font-mono text-white tracking-wide">EST. 2024</span>
+            </div>
           </div>
+
         </div>
       </div>
     </section>

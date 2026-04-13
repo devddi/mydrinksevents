@@ -1,129 +1,80 @@
 import React from 'react';
-import { Phone, Mail, Instagram, MapPin, Heart } from 'lucide-react';
 
 const Footer: React.FC = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
-    <footer className="border-t border-white/10" style={{ backgroundColor: '#181818' }}>
-      <div className="container mx-auto px-4 py-12">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            {/* Brand */}
-            <div className="space-y-4">
-              <div className="flex items-center space-x-2">
-                <img 
-                  src="https://vlriviouictrannhemnh.supabase.co/storage/v1/object/public/midiasOMD/fotosBebidas/my.png" 
-                  alt="MyDrinks Logo" 
-                  className="w-10 h-10 object-contain"
-                />
-                <h3 className="font-playfair text-2xl font-bold text-white">
-                  MyDrinks<span className="text-brand-orange">!</span>
-                </h3>
-              </div>
-              <p className="text-gray-300 leading-relaxed">
-                Transformamos eventos em experiências inesquecíveis com drinks, coquetéis 
-                e mesas gourmet.
-              </p>
-              <div className="flex space-x-4">
-                <a 
-                  href="tel:+5588988940894" 
-                  className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-brand-orange/20 transition-colors duration-300"
-                >
-                  <Phone className="text-brand-orange" size={18} />
-                </a>
-                <a 
-                  href="mailto:contato@mydrinks.com.br" 
-                  className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-brand-orange/20 transition-colors duration-300"
-                >
-                  <Mail className="text-brand-orange" size={18} />
-                </a>
+    <footer className="bg-[#050508] text-white pt-20 pb-8 mt-12 rounded-t-[4rem] px-6 lg:px-12 border-t border-white/5">
+      <div className="container mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          {/* Brand & Slogan */}
+          <div className="lg:col-span-2 space-y-6">
+            <h3 className="text-3xl font-playfair font-bold">
+              My <span className="text-brand-orange">Drinks!</span>
+            </h3>
+            <p className="text-gray-400 font-inter max-w-sm text-sm">
+              Mais que bebidas. Uma experiência completa e memorável para o seu evento. Elegância em cada detalhe, desde novembro de 2024.
+            </p>
+            
+            {/* Status Indicator */}
+            <div className="inline-flex items-center gap-3 bg-white/5 border border-white/10 rounded-full px-4 py-2 mt-4">
+              <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-[pulse_2s_ease-in-out_infinite]" />
+              <span className="text-xs font-mono text-gray-300 tracking-wider">AGENDA_OPERACIONAL</span>
+            </div>
+          </div>
+
+          {/* Navigation */}
+          <div>
+            <h4 className="font-bold font-inter mb-6 uppercase tracking-widest text-sm text-gray-200">Explorar</h4>
+            <ul className="space-y-4 text-sm text-gray-400">
+              <li><a href="#home" className="hover:text-brand-orange transition-colors">A Cena</a></li>
+              <li><a href="#sobre" className="hover:text-brand-orange transition-colors">O Manifesto</a></li>
+              <li><a href="#experiencias" className="hover:text-brand-orange transition-colors">Nossa Entrega</a></li>
+              <li><a href="#protocolo" className="hover:text-brand-orange transition-colors">Protocolo</a></li>
+            </ul>
+          </div>
+
+          {/* Social / Contact */}
+          <div>
+            <h4 className="font-bold font-inter mb-6 uppercase tracking-widest text-sm text-gray-200">Conexão</h4>
+            <ul className="space-y-4 text-sm text-gray-400">
+              <li>
                 <a 
                   href="https://instagram.com/mydrinksevents" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-brand-orange/20 transition-colors duration-300"
+                  className="hover:text-brand-orange transition-colors"
                 >
-                  <Instagram className="text-brand-orange" size={18} />
+                  Instagram
                 </a>
-              </div>
-            </div>
-
-            {/* Quick Links */}
-            <div className="space-y-4">
-              <h4 className="font-semibold text-white text-lg">Links Rápidos</h4>
-              <div className="space-y-2">
-                <button 
-                  onClick={scrollToTop}
-                  className="block text-gray-300 hover:text-brand-orange transition-colors duration-300"
+              </li>
+              <li>
+                <a 
+                  href="https://wa.me/5588988940894?text=Olá,%20tenho%20interesse%20em%20saber%20mais" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-brand-orange transition-colors"
                 >
-                  Início
-                </button>
-                <button 
-                  onClick={() => document.getElementById('sobre')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="block text-gray-300 hover:text-brand-orange transition-colors duration-300"
+                  WhatsApp
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://www.google.com/maps/place/3%C2%B039'19.9%22S+40%C2%B022'52.1%22W/@-3.6555487,-40.3812265,3a,75y,81.98h,67.69t/data=!3m7!1e1!3m5!1sDLAeMHwXaNzORg9ufwSdcA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D22.312412239045017%26panoid%3DDLAeMHwXaNzORg9ufwSdcA%26yaw%3D81.97760598895212!7i13312!8i6656!4m4!3m3!8m2!3d-3.6555328!4d-40.3811493?hl=pt-BR&entry=ttu&g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-brand-orange transition-colors"
                 >
-                  Sobre Nós
-                </button>
-                <button 
-                  onClick={() => document.getElementById('servicos')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="block text-gray-300 hover:text-brand-orange transition-colors duration-300"
-                >
-                  Serviços
-                </button>
-                <button 
-                  onClick={() => document.getElementById('galeria')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="block text-gray-300 hover:text-brand-orange transition-colors duration-300"
-                >
-                  Galeria
-                </button>
-                <button 
-                  onClick={() => document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="block text-gray-300 hover:text-brand-orange transition-colors duration-300"
-                >
-                  Contato
-                </button>
-              </div>
-            </div>
-
-            {/* Contact Info */}
-            <div className="space-y-4">
-              <h4 className="font-semibold text-white text-lg">Contato</h4>
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  <Phone className="text-brand-orange flex-shrink-0" size={18} />
-                  <span className="text-gray-300">(88) 98894-0894</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Mail className="text-brand-orange flex-shrink-0" size={18} />
-                  <span className="text-gray-300">contato@mydrinks.com.br</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <MapPin className="text-brand-orange flex-shrink-0" size={18} />
-                  <span className="text-gray-300">Sobral e Região</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Instagram className="text-brand-orange flex-shrink-0" size={18} />
-                  <span className="text-gray-300">@mydrinksevents</span>
-                </div>
-              </div>
-            </div>
+                  Espaço MyDrinks
+                </a>
+              </li>
+            </ul>
           </div>
+        </div>
 
-          {/* Bottom */}
-          <div className="pt-8 border-t border-white/10">
-            <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-              <div className="text-gray-400 text-sm">
-                © 2024 MyDrinks! Todos os direitos reservados.
-              </div>
-              <div className="flex items-center space-x-1 text-gray-400 text-sm">
-                <span>Feito com</span>
-                <Heart className="text-brand-orange fill-current" size={16} />
-                <span>para eventos únicos</span>
-              </div>
-            </div>
+        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-600 font-inter">
+          <p>&copy; {new Date().getFullYear()} My Drinks! Todos os direitos reservados.</p>
+          <div className="flex gap-4">
+            <a href="#" className="hover:text-gray-300 transition-colors">Privacidade</a>
+            <a href="#" className="hover:text-gray-300 transition-colors">Legal</a>
           </div>
         </div>
       </div>
