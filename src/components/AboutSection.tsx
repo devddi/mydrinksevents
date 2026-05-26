@@ -71,9 +71,6 @@ const AboutSection: React.FC = () => {
             
             <div className="space-y-6 text-white/75 font-inter text-base md:text-lg leading-relaxed contrast-line">
               <p>
-                A MY Drinks nasceu para elevar o padrão dos eventos.
-              </p>
-              <p>
                 Mais do que servir drinks, criamos experiências sensoriais que encantam do primeiro ao último detalhe.
               </p>
               <p className="font-semibold text-white">
@@ -94,7 +91,7 @@ const AboutSection: React.FC = () => {
             {/* Tag/Label */}
             <div className="absolute bottom-6 left-6 z-20 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 flex items-center gap-3">
               <span className="w-2 h-2 rounded-full bg-brand-gold animate-pulse" />
-              <span className="text-sm font-mono text-white tracking-wide">ATELIÊ & CURADORIA</span>
+              <span className="text-sm font-mono text-white tracking-wide">WELCOME • DRINKS • GASTRONOMIA</span>
             </div>
           </div>
 

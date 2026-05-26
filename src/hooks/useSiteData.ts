@@ -45,7 +45,6 @@ export const useSiteServices = () => {
   return useQuery({
     queryKey: ['site-services'],
     queryFn: async () => {
-      console.log('Fetching services from Supabase...');
       const { data, error } = await supabase
         .from('site_servicos')
         .select('*')
@@ -57,7 +56,6 @@ export const useSiteServices = () => {
         throw error;
       }
       
-      console.log('Services fetched:', data);
       return data as SiteService[];
     },
   });
@@ -67,7 +65,6 @@ export const useSiteTestimonials = () => {
   return useQuery({
     queryKey: ['site-testimonials'],
     queryFn: async () => {
-      console.log('Fetching testimonials from Supabase...');
       const { data, error } = await supabase
         .from('site_depoimentos')
         .select('*')
@@ -79,7 +76,6 @@ export const useSiteTestimonials = () => {
         throw error;
       }
       
-      console.log('Testimonials fetched:', data);
       return data as SiteTestimonial[];
     },
   });
@@ -89,7 +85,6 @@ export const useSiteGallery = () => {
   return useQuery({
     queryKey: ['site-gallery'],
     queryFn: async () => {
-      console.log('Fetching gallery from Supabase...');
       const { data, error } = await supabase
         .from('site_galeria')
         .select('*')
@@ -101,7 +96,6 @@ export const useSiteGallery = () => {
         throw error;
       }
       
-      console.log('Gallery fetched:', data);
       return data as SiteGallery[];
     },
   });
@@ -111,7 +105,6 @@ export const useSiteConfig = () => {
   return useQuery({
     queryKey: ['site-config'],
     queryFn: async () => {
-      console.log('Fetching site config from Supabase...');
       const { data, error } = await supabase
         .from('site_configuracoes')
         .select('*');
@@ -120,8 +113,6 @@ export const useSiteConfig = () => {
         console.error('Error fetching site config:', error);
         throw error;
       }
-      
-      console.log('Site config fetched:', data);
       
       // Convert array to object for easier access
       const config: Record<string, string> = {};
@@ -144,7 +135,6 @@ export const useSubmitContact = () => {
     numero_convidados?: number;
     mensagem?: string;
   }) => {
-    console.log('Submitting contact form:', contactData);
     const { data, error } = await supabase
       .from('site_contatos')
       .insert([contactData]);
@@ -154,7 +144,6 @@ export const useSubmitContact = () => {
       throw error;
     }
     
-    console.log('Contact submitted successfully:', data);
     return data;
   };
 

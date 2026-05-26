@@ -104,3 +104,51 @@
     pointer-events: none;
   }
 }
+
+/* Custom premium scrollbar style */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  transition: background-color 0.3s;
+}
+
+/* Show scrollbar thumb when hovering over the page or scrolling */
+html:hover ::-webkit-scrollbar-thumb,
+html.is-scrolling ::-webkit-scrollbar-thumb {
+  background-color: rgba(198, 161, 91, 0.25);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+/* Highlight thumb when hovering directly over it */
+html:hover ::-webkit-scrollbar-thumb:hover,
+html.is-scrolling ::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(198, 161, 91, 0.85);
+}
+
+/* Firefox scrollbar support */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color 0.3s;
+}
+
+html:hover {
+  scrollbar-color: rgba(198, 161, 91, 0.25) transparent;
+}
+
+html.is-scrolling {
+  scrollbar-color: rgba(198, 161, 91, 0.5) transparent;
+}
+

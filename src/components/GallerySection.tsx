@@ -45,10 +45,10 @@ const GallerySection: React.FC = () => {
               Galeria
             </p>
             <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl text-white mb-4 md:mb-6 leading-tight">
-              Casamentos, detalhes e <span className="text-drama">memórias.</span>
+              A arte de celebrar em <span className="text-drama">detalhes.</span>
             </h2>
             <p className="font-inter text-base md:text-lg text-white/70 max-w-3xl mx-auto leading-relaxed px-4">
-              Uma seleção de momentos com estética premium: iluminação quente, tons champanhe e o cuidado em cada execução.
+              Uma curadoria visual de grandes eventos, marcada pela sofisticação dos nossos drinks e a excelência de cada entrega.
             </p>
           </div>
 

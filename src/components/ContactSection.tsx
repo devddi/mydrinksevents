@@ -188,6 +188,8 @@ const ContactSection: React.FC = () => {
                     <SelectContent className="bg-gray-800 border-gray-600 z-50">
                       <SelectItem value="casamento" className="text-white hover:bg-gray-700 focus:bg-gray-700">Casamento</SelectItem>
                       <SelectItem value="corporativo" className="text-white hover:bg-gray-700 focus:bg-gray-700">Evento Corporativo</SelectItem>
+                      <SelectItem value="formatura" className="text-white hover:bg-gray-700 focus:bg-gray-700">Formatura</SelectItem>
+                      <SelectItem value="welcome_wedding" className="text-white hover:bg-gray-700 focus:bg-gray-700">Welcome Wedding Experience</SelectItem>
                       <SelectItem value="aniversario" className="text-white hover:bg-gray-700 focus:bg-gray-700">Aniversário</SelectItem>
                       <SelectItem value="festa" className="text-white hover:bg-gray-700 focus:bg-gray-700">Festa</SelectItem>
                       <SelectItem value="outro" className="text-white hover:bg-gray-700 focus:bg-gray-700">Outro</SelectItem>

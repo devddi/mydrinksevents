@@ -35,9 +35,11 @@ const ProtocolSection: React.FC = () => {
     'Experiência personalizada',
     'Atendimento refinado',
     'Estrutura premium',
-    'Ateliê físico',
+    'Espaço físico',
     'Drinks autorais',
     'Ambientação sofisticada',
+    'Pedidos via totem digital',
+    'Sem filas físicas',
   ];
 
   return (
@@ -55,7 +57,7 @@ const ProtocolSection: React.FC = () => {
                 O que torna a experiência MY Drinks <span className="text-drama block mt-2">inegociável.</span>
               </h2>
               <p className="differential-element font-inter text-white/70 text-base md:text-lg leading-relaxed max-w-xl">
-                Um serviço pensado para casamentos de alto padrão: curadoria, estética e hospitalidade no mesmo nível do seu evento.
+                Um serviço pensado para eventos de alto padrão: curadoria, estética e hospitalidade no mesmo nível do seu evento.
               </p>
             </div>
 

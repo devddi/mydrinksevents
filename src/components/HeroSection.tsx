@@ -3,7 +3,7 @@ import gsap from 'gsap';
 
 const HeroSection: React.FC = () => {
   const heroRef = useRef<HTMLElement>(null);
-  const heroImageUrl = 'https://vlriviouictrannhemnh.supabase.co/storage/v1/object/public/midiasOMD/utils/evento.jpg';
+  const heroImageUrl = 'https://vlriviouictrannhemnh.supabase.co/storage/v1/object/public/midiasOMD/utils/evento_4.png';
 
   useEffect(() => {
     const ctx = gsap.context(() => {

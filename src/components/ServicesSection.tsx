@@ -34,7 +34,7 @@ const ServicesSection: React.FC = () => {
       description: 'Experiências personalizadas para cada evento.',
     },
     {
-      title: 'Mesas Gourmet',
+      title: 'Experiência Gastronômica',
       description: 'Apresentação sofisticada e sabores marcantes.',
     },
     {
@@ -44,6 +44,14 @@ const ServicesSection: React.FC = () => {
     {
       title: 'Corporativo',
       description: 'Eventos com identidade e impacto.',
+    },
+    {
+      title: 'Formatura',
+      description: 'Celebrações memoráveis e cheias de estilo para marcar a sua conquista.',
+    },
+    {
+      title: 'Welcome Wedding Experience',
+      description: 'O charme e receptividade do nosso carrinho gourmet na porta da igreja.',
     },
   ];
 
