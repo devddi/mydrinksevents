@@ -9,7 +9,7 @@ const GallerySection: React.FC = () => {
     error
   } = useSiteGallery();
   if (isLoading) {
-    return <section id="galeria" className="py-12 md:py-20 relative">
+    return <section id="galeria" className="py-20 relative bg-brand-black">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-center">
             <Loader2 className="animate-spin text-brand-orange" size={48} />
@@ -19,7 +19,7 @@ const GallerySection: React.FC = () => {
   }
   if (error) {
     console.error('Error loading gallery:', error);
-    return <section id="galeria" className="py-12 md:py-20 relative">
+    return <section id="galeria" className="py-20 relative bg-brand-black">
         <div className="container mx-auto px-4">
           <div className="text-center text-white">
             <p>Erro ao carregar galeria. Tente novamente mais tarde.</p>
@@ -28,7 +28,7 @@ const GallerySection: React.FC = () => {
       </section>;
   }
   if (!galleryImages || galleryImages.length === 0) {
-    return <section id="galeria" className="py-12 md:py-20 relative">
+    return <section id="galeria" className="py-20 relative bg-brand-black">
         <div className="container mx-auto px-4">
           <div className="text-center text-white">
             <p>Nenhuma imagem encontrada na galeria.</p>
@@ -36,16 +36,19 @@ const GallerySection: React.FC = () => {
         </div>
       </section>;
   }
-  return <section id="galeria" className="py-12 md:py-20 relative">
+  return <section id="galeria" className="py-24 relative bg-brand-black">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6">
-              Galeria de <span className="text-brand-orange">Eventos</span>
+            <p className="text-brand-gold font-inter text-xs md:text-sm uppercase tracking-[0.32em] mb-5">
+              Galeria
+            </p>
+            <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl text-white mb-4 md:mb-6 leading-tight">
+              Casamentos, detalhes e <span className="text-drama">memórias.</span>
             </h2>
-            <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4">
-              Veja alguns dos nossos trabalhos e se inspire para o seu próximo evento
+            <p className="font-inter text-base md:text-lg text-white/70 max-w-3xl mx-auto leading-relaxed px-4">
+              Uma seleção de momentos com estética premium: iluminação quente, tons champanhe e o cuidado em cada execução.
             </p>
           </div>
 
@@ -54,7 +57,7 @@ const GallerySection: React.FC = () => {
             {galleryImages.map(image => <div key={image.id} className="glass-card p-0 group hover:bg-white/10 transition-all duration-300 hover:scale-105 cursor-pointer overflow-hidden" onClick={() => setSelectedImage(image.url_imagem)}>
                 {/* Image container */}
                 <div className="aspect-square relative overflow-hidden rounded-t-xl">
-                  <img src={image.url_imagem} alt={image.titulo || image.descricao || 'Imagem da galeria'} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+                  <img src={image.url_imagem} alt={image.titulo || image.descricao || 'Imagem da galeria'} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" style={{ filter: 'saturate(0.78) contrast(1.08) brightness(0.92)' }} />
                   
                   {/* Overlay on hover */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -63,7 +66,7 @@ const GallerySection: React.FC = () => {
                 {/* Card content */}
                 <div className="p-4 md:p-6">
                   {image.categoria && <div className="mb-3">
-                      <span className="inline-block bg-brand-orange/20 text-brand-orange text-xs px-3 py-1 rounded-full font-semibold">
+                      <span className="inline-block bg-brand-gold/15 text-brand-gold text-xs px-3 py-1 rounded-full font-semibold">
                         {image.categoria}
                       </span>
                     </div>}
@@ -72,12 +75,12 @@ const GallerySection: React.FC = () => {
                       {image.titulo}
                     </h3>}
                   
-                  {image.descricao && <p className="text-gray-300 text-sm leading-relaxed mb-4">
+                  {image.descricao && <p className="text-white/70 text-sm leading-relaxed mb-4 font-inter">
                       {image.descricao}
                     </p>}
                   
                   <div className="pt-4 border-t border-white/10">
-                    <span className="text-brand-orange hover:text-brand-orange-light font-semibold text-sm transition-colors duration-300">
+                    <span className="text-brand-gold hover:text-brand-orange-light font-semibold text-sm transition-colors duration-300">
                       Ver imagem →
                     </span>
                   </div>

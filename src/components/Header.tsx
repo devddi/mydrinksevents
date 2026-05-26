@@ -16,9 +16,10 @@ const Header = () => {
   }, []);
 
   const navLinks = [
-    { name: 'O Manifesto', href: '#sobre' },
-    { name: 'Experiências', href: '#experiencias' },
-    { name: 'Protocolo', href: '#protocolo' },
+    { name: 'Quem Somos', href: '#sobre' },
+    { name: 'Serviços', href: '#experiencias' },
+    { name: 'Diferenciais', href: '#diferenciais' },
+    { name: 'Galeria', href: '#galeria' },
   ];
 
   return (
@@ -26,14 +27,14 @@ const Header = () => {
       <div 
         className={`w-full max-w-5xl flex items-center justify-between px-6 md:px-8 py-4 rounded-full transition-all duration-500 ${
           isScrolled 
-            ? 'bg-[#181818]/70 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50' 
+            ? 'bg-brand-black/70 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50' 
             : 'bg-transparent border border-transparent'
         }`}
       >
         {/* Logo */}
         <div className="flex items-center">
-          <a href="#home" className="text-xl md:text-2xl font-playfair font-bold text-white tracking-wide">
-            My <span className="text-brand-orange">Drinks!</span>
+          <a href="#home" className="text-xl md:text-2xl font-playfair text-white tracking-[0.14em] uppercase">
+            MY <span className="text-brand-gold">Drinks</span>
           </a>
         </div>
 
@@ -56,9 +57,9 @@ const Header = () => {
             href="https://wa.me/5588988940894?text=Olá,%20tenho%20interesse%20em%20saber%20mais"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-inter font-semibold text-brand-orange hover:text-white transition-colors bg-white/5 hover:bg-brand-orange/20 px-5 py-2 rounded-full border border-white/10 interactive-lift"
+            className="text-sm font-inter font-semibold text-brand-black transition-colors bg-brand-gold/90 hover:bg-brand-gold px-5 py-2 rounded-full border border-white/10 interactive-lift"
           >
-            Solicitar Orçamento
+            Solicitar orçamento
           </a>
         </div>
 
@@ -73,7 +74,7 @@ const Header = () => {
 
       {/* Mobile Nav */}
       {isMobileMenuOpen && (
-        <div className="absolute top-24 left-4 right-4 bg-[#181818]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col gap-4 shadow-2xl md:hidden">
+        <div className="absolute top-24 left-4 right-4 bg-brand-black/95 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col gap-4 shadow-2xl md:hidden">
           {navLinks.map((link) => (
             <a 
               key={link.name} 
@@ -89,9 +90,9 @@ const Header = () => {
               setIsMobileMenuOpen(false);
               document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="w-full mt-4 bg-brand-orange text-white font-semibold py-3 rounded-xl"
+            className="w-full mt-4 bg-brand-gold text-brand-black font-semibold py-3 rounded-xl"
           >
-            Acessar Agenda
+            Falar no WhatsApp
           </button>
         </div>
       )}

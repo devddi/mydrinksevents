@@ -7,6 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 const AboutSection: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
+  const aboutImageUrl = 'https://vlriviouictrannhemnh.supabase.co/storage/v1/object/public/midiasOMD/utils/fachada_3.png';
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -49,10 +50,9 @@ const AboutSection: React.FC = () => {
 
   return (
     <section ref={sectionRef} id="sobre" className="relative py-32 bg-[#0D0D12] overflow-hidden">
-      {/* Background Texture */}
       <div 
         className="absolute inset-0 opacity-10 bg-cover bg-center pointer-events-none"
-        style={{ backgroundImage: `url('https://images.unsplash.com/photo-1502814408796-01589fd7eb0a?q=80&w=2000&auto=format&fit=crop')` }}
+        style={{ backgroundImage: `url('https://vlriviouictrannhemnh.supabase.co/storage/v1/object/public/midiasOMD/utils/evento_2.jpg')` }}
       />
       
       <div className="container relative z-10 mx-auto px-4 max-w-7xl">
@@ -61,43 +61,40 @@ const AboutSection: React.FC = () => {
           {/* Manifesto & History */}
           <div ref={textRef} className="space-y-12">
             <div>
-              <p className="contrast-line text-lg md:text-xl text-gray-400 font-inter mb-4">
-                Para muitos, um evento é apenas uma data.
+              <p className="contrast-line text-sm md:text-base text-brand-gold font-inter uppercase tracking-[0.32em] mb-6">
+                Quem somos
               </p>
-              <h2 className="contrast-line text-4xl md:text-6xl font-bold text-white tracking-tight leading-tight">
-                Para nós, é uma <span className="text-drama text-5xl md:text-7xl block mt-2">Experiência em Movimento.</span>
+              <h2 className="contrast-line text-4xl md:text-6xl text-white leading-tight">
+                A MY Drinks nasceu para <span className="text-drama text-5xl md:text-7xl block mt-2">elevar o padrão</span> dos eventos.
               </h2>
             </div>
             
-            <div className="space-y-6 text-gray-300 font-inter text-base md:text-lg leading-relaxed contrast-line">
+            <div className="space-y-6 text-white/75 font-inter text-base md:text-lg leading-relaxed contrast-line">
               <p>
-                A <strong>My Drinks</strong> nasceu da união de Thaynara, Neto e seu primo. 
-                De um pub local e da paixão por festas, entendemos que não basta saber as receitas — é preciso sentir o ritmo e a energia 
-                que fazem uma celebração acontecer. Mais do que servir, nosso olhar é para encantar e surpreender.
+                A MY Drinks nasceu para elevar o padrão dos eventos.
               </p>
               <p>
-                Evoluímos além do bar: hoje criamos experiências completas, incluindo ilhas gastronômicas pensadas para harmonizar 
-                com cada momento. Em abril de 2026, com uma marca mais "clean" e elegante, inauguramos nosso espaço físico 
-                para realizar degustações e planejar todos os detalhes junto com você.
+                Mais do que servir drinks, criamos experiências sensoriais que encantam do primeiro ao último detalhe.
               </p>
               <p className="font-semibold text-white">
-                Porque, para a My Drinks, não existe evento parado. Existe memória sendo criada.
+                Elegância, precisão e hospitalidade — sempre no ritmo do seu grande dia.
               </p>
             </div>
           </div>
 
           {/* Photo Space */}
           <div className="about-image relative w-full aspect-[4/5] cinematic-container border border-white/10 group">
-            <div className="absolute inset-0 bg-brand-orange/20 mix-blend-overlay z-10 group-hover:bg-brand-orange/10 transition-colors duration-500" />
+            <div className="absolute inset-0 bg-brand-gold/15 mix-blend-overlay z-10 group-hover:bg-brand-gold/10 transition-colors duration-500" />
             <img 
-              src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=800&auto=format&fit=crop" 
-              alt="My Drinks Equipe e Experiência" 
-              className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
+              src={aboutImageUrl}
+              alt="MY Drinks — fachada" 
+              className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-all duration-700"
+              style={{ filter: 'saturate(0.9) contrast(1.05) brightness(0.95)' }}
             />
             {/* Tag/Label */}
             <div className="absolute bottom-6 left-6 z-20 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-brand-orange animate-pulse" />
-              <span className="text-sm font-mono text-white tracking-wide">EST. 2024</span>
+              <span className="w-2 h-2 rounded-full bg-brand-gold animate-pulse" />
+              <span className="text-sm font-mono text-white tracking-wide">ATELIÊ & CURADORIA</span>
             </div>
           </div>
 

@@ -34,7 +34,7 @@
 
   body {
     @apply text-foreground font-inter;
-    background-color: #181818 !important;
+    background-color: #0F0F0F !important;
   }
 
   /* Global Noise Overlay for Texture */
@@ -46,11 +46,11 @@
 
   html {
     scroll-behavior: smooth;
-    background-color: #181818 !important;
+    background-color: #0F0F0F !important;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-inter tracking-tight;
+    @apply font-playfair font-light tracking-[0.04em];
   }
 }
 
@@ -64,18 +64,26 @@
     @apply bg-[#1A1A1A]/60 backdrop-blur-md border border-white/5 rounded-[2rem] shadow-2xl;
   }
 
-  /* Magnetic feel button with cubic-bezier */
   .brand-button {
-    @apply relative bg-brand-orange text-white font-semibold py-4 px-8 rounded-full overflow-hidden transition-all duration-300 transform outline-none flex items-center justify-center;
+    @apply relative bg-brand-gold text-brand-black font-semibold py-4 px-8 rounded-full overflow-hidden transition-all duration-300 transform outline-none flex items-center justify-center;
     transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
   
   .brand-button:hover {
-    @apply scale-[1.03] shadow-[0_0_20px_rgba(255,84,0,0.4)];
+    @apply scale-[1.03] shadow-[0_0_20px_rgba(198,161,91,0.25)];
     transform: scale(1.03) translateY(-1px);
   }
 
-  /* Subtitle / Dropdown interactive elements */
+  .brand-button-secondary {
+    @apply relative bg-transparent text-white font-semibold py-4 px-8 rounded-full overflow-hidden transition-all duration-300 transform outline-none flex items-center justify-center border border-brand-gold/70;
+    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .brand-button-secondary:hover {
+    @apply border-brand-gold text-white shadow-[0_0_18px_rgba(198,161,91,0.18)] bg-white/5;
+    transform: translateY(-1px);
+  }
+
   .interactive-lift {
     @apply transition-transform duration-300;
     transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -85,14 +93,13 @@
     transform: translateY(-2px);
   }
 
-  /* Typography: Drama italic serif */
   .text-drama {
-    @apply font-playfair italic text-brand-orange leading-[0.9];
+    @apply font-playfair italic text-brand-gold leading-[0.9];
   }
 
   .smoke-particle {
     position: absolute;
-    background: radial-gradient(circle, rgba(255, 84, 0, 0.3) 0%, rgba(255, 84, 0, 0.1) 50%, transparent 100%);
+    background: radial-gradient(circle, rgba(198, 161, 91, 0.18) 0%, rgba(198, 161, 91, 0.06) 50%, transparent 100%);
     border-radius: 50%;
     pointer-events: none;
   }

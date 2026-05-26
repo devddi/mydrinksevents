@@ -5,6 +5,7 @@ export const SplashCursor: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const splashesRef = useRef<Array<{ x: number; y: number; size: number; opacity: number; life: number }>>([]);
   const animationRef = useRef<number>();
+  const gold = { r: 198, g: 161, b: 91 };
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -65,9 +66,9 @@ export const SplashCursor: React.FC = () => {
           splash.x, splash.y, 0,
           splash.x, splash.y, splash.size
         );
-        gradient.addColorStop(0, `rgba(255, 84, 0, ${splash.opacity * 0.4})`); // 50% less opacity (was 0.8)
-        gradient.addColorStop(0.4, `rgba(255, 84, 0, ${splash.opacity * 0.2})`); // 50% less opacity (was 0.4)
-        gradient.addColorStop(1, `rgba(255, 84, 0, 0)`);
+        gradient.addColorStop(0, `rgba(${gold.r}, ${gold.g}, ${gold.b}, ${splash.opacity * 0.18})`);
+        gradient.addColorStop(0.4, `rgba(${gold.r}, ${gold.g}, ${gold.b}, ${splash.opacity * 0.08})`);
+        gradient.addColorStop(1, `rgba(${gold.r}, ${gold.g}, ${gold.b}, 0)`);
 
         ctx.fillStyle = gradient;
         ctx.beginPath();

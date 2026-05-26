@@ -21,9 +21,14 @@ export default {
 		extend: {
 			colors: {
 				brand: {
-					orange: '#FF5400',
-					'orange-light': '#FF6B1A',
-					'orange-dark': '#E04800',
+					black: '#0F0F0F',
+					champagne: '#F5E9DA',
+					gold: '#C6A15B',
+					bronze: '#A47148',
+					orange: '#C6A15B',
+					'orange-light': '#D8BC7C',
+					'orange-dark': '#A47148',
+					'orange-accent': '#FF5400',
 				},
 				glass: {
 					white: 'rgba(255, 255, 255, 0.1)',

@@ -7,12 +7,13 @@ import AboutSection from '@/components/AboutSection';
 import ServicesSection from '@/components/ServicesSection';
 import PhilosophySection from '@/components/PhilosophySection';
 import ProtocolSection from '@/components/ProtocolSection';
+import GallerySection from '@/components/GallerySection';
 import GetStarted from '@/components/GetStarted';
 import Footer from '@/components/Footer';
 
 const Index = () => {
   return (
-    <div className="min-h-screen relative overflow-x-hidden" style={{ backgroundColor: '#181818' }}>
+    <div className="min-h-screen relative overflow-x-hidden bg-brand-black">
       {/* Splash cursor effect - behind everything */}
       <SplashCursor />
       
@@ -27,6 +28,7 @@ const Index = () => {
         <AboutSection />
         <ServicesSection />
         <ProtocolSection />
+        <GallerySection />
         <GetStarted />
         <Footer />
       </div>
