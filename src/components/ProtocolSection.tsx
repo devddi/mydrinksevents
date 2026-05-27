@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -6,7 +6,20 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ProtocolSection: React.FC = () => {
   const containerRef = useRef<HTMLElement>(null);
-  const imageUrl = 'https://vlriviouictrannhemnh.supabase.co/storage/v1/object/public/midiasOMD/utils/carrinho-my.png';
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const differentials = [
+    { name: 'Tábua de shots em LED exclusiva', image: '/assets/nossas-entregas/tabua-shots-led.png' },
+    { name: 'Experiência personalizada', image: '/assets/nossas-entregas/experiencia-personalizada.jpg' },
+    { name: 'Atendimento refinado', image: '/assets/nossas-entregas/atendimento.jpg' },
+    { name: 'Estrutura premium', image: '/assets/nossas-entregas/estrutura-premium.jpg' },
+    { name: 'Espaço físico', image: '/assets/nossas-entregas/espaco-fisico.jpg' },
+    { name: 'Drinks autorais', image: '/assets/nossas-entregas/drinks-autorais.jpg' },
+    { name: 'Ambientação sofisticada', image: '/assets/nossas-entregas/ambientacao.jpg' },
+    { name: 'Pedidos via totem digital', image: '/assets/nossas-entregas/totem-digital.png' },
+    { name: 'Sem filas físicas', image: '/assets/nossas-entregas/sem-filas.jpg' },
+  ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -16,7 +29,7 @@ const ProtocolSection: React.FC = () => {
         {
           y: 0,
           opacity: 1,
-          stagger: 0.1,
+          stagger: 0.08,
           duration: 1,
           ease: 'power3.out',
           scrollTrigger: {
@@ -30,17 +43,15 @@ const ProtocolSection: React.FC = () => {
     return () => ctx.revert();
   }, []);
 
-  const differentials = [
-    'Tábua de shots em LED exclusiva',
-    'Experiência personalizada',
-    'Atendimento refinado',
-    'Estrutura premium',
-    'Espaço físico',
-    'Drinks autorais',
-    'Ambientação sofisticada',
-    'Pedidos via totem digital',
-    'Sem filas físicas',
-  ];
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % differentials.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [isPaused, differentials.length]);
 
   return (
     <section ref={containerRef} id="diferenciais" className="bg-brand-black relative py-28 overflow-hidden">
@@ -62,36 +73,81 @@ const ProtocolSection: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {differentials.map((item) => (
-                <div
-                  key={item}
-                  className="differential-element rounded-[1.5rem] border border-white/10 bg-white/5 px-6 py-5 backdrop-blur-sm"
-                >
-                  <div className="flex items-start gap-4">
-                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" />
-                    <p className="font-inter text-white/85 leading-relaxed">
-                      {item}
-                    </p>
+              {differentials.map((item, index) => {
+                const isActive = index === activeIndex;
+                return (
+                  <div
+                    key={item.name}
+                    className={`differential-element rounded-[1.5rem] border transition-all duration-500 px-6 py-5 backdrop-blur-sm cursor-pointer ${
+                      isActive 
+                        ? 'border-brand-gold/60 bg-brand-gold/10 shadow-[0_0_20px_rgba(198,161,91,0.15)] scale-[1.02]' 
+                        : 'border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/[0.08]'
+                    }`}
+                    onMouseEnter={() => {
+                      setActiveIndex(index);
+                      setIsPaused(true);
+                    }}
+                    onMouseLeave={() => {
+                      setIsPaused(false);
+                    }}
+                    onClick={() => {
+                      setActiveIndex(index);
+                      setIsPaused(true);
+                    }}
+                  >
+                    <div className="flex items-start gap-4">
+                      <span className={`mt-2 h-2 w-2 rounded-full transition-all duration-500 ${
+                        isActive ? 'bg-brand-gold scale-125 shadow-[0_0_8px_#C6A15B]' : 'bg-white/40'
+                      }`} />
+                      <p className={`font-inter leading-relaxed transition-colors duration-500 ${
+                        isActive ? 'text-white font-semibold' : 'text-white/70'
+                      }`}>
+                        {item.name}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
-          <div className="differential-element rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl">
-            <div className="relative aspect-[4/3]">
-              <img
-                src={imageUrl}
-                alt="Carrinho MY Drinks"
-                className="absolute inset-0 w-full h-full object-cover"
-                style={{ filter: 'saturate(0.95) contrast(1.05) brightness(0.95)' }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
-              <div className="absolute bottom-8 left-8 right-8">
-                <p className="font-inter text-white/85 leading-relaxed">
-                  Estrutura discreta, acabamento impecável e um serviço que se percebe sem precisar explicar.
-                </p>
-              </div>
+          {/* Cinematic Interactive Carousel Column */}
+          <div className="differential-element rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl relative aspect-[4/3]">
+            {differentials.map((item, index) => {
+              const isActive = index === activeIndex;
+              return (
+                <div
+                  key={item.name}
+                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                    isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                  }`}
+                >
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className={`w-full h-full object-cover transition-transform ease-out ${
+                      isActive ? 'scale-105' : 'scale-100'
+                    }`}
+                    style={{ 
+                      filter: 'saturate(0.95) contrast(1.05) brightness(0.95)',
+                      transitionDuration: '4000ms'
+                    }}
+                  />
+                </div>
+              );
+            })}
+            
+            {/* Elegant overlay gradients above images */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent z-20 pointer-events-none" />
+            
+            {/* Dynamic Label Display */}
+            <div className="absolute bottom-8 left-8 right-8 z-30 pointer-events-none">
+              <p className="font-inter text-brand-gold text-[10px] sm:text-xs uppercase tracking-[0.2em] mb-1 font-semibold">
+                Destaque
+              </p>
+              <h4 className="font-playfair text-white text-xl sm:text-2xl font-light leading-snug drop-shadow-md">
+                {differentials[activeIndex].name}
+              </h4>
             </div>
           </div>
         </div>
