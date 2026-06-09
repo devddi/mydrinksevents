@@ -19,7 +19,7 @@ const Header = () => {
     { name: 'Quem Somos', href: '#sobre' },
     { name: 'Serviços', href: '#experiencias' },
     { name: 'Diferenciais', href: '#diferenciais' },
-    { name: 'Galeria', href: '#galeria' },
+    { name: 'Eventos', href: '#eventos' },
   ];
 
   return (
